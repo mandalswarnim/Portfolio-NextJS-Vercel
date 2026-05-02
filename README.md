@@ -234,12 +234,6 @@ This project is open source and available under the MIT License.
 
 ## Contact
 
-**Swarnim Mandal**
-- Email: mswarnim1@gmail.com
-- Phone: +44-7585345010
-- Location: London, United Kingdom
-- Website: [Portfolio](https://swarnimmandal.me)
-
 ## Acknowledgments
 
 - Renaissance background image inspiration
