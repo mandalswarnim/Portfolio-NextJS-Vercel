@@ -1,195 +1,233 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import FadeIn from "@/components/animations/FadeIn";
+import StaggerContainer from "@/components/animations/StaggerContainer";
+import StaggerItem from "@/components/animations/StaggerItem";
 
 export const metadata: Metadata = {
-  title: "Services - Swarnim Mandal",
-  description: "AI solutions, software development, and consulting services",
+  title: "Work — Swarnim Mandal",
+  description: "Projects, services, and open-source work by Swarnim Mandal.",
 };
 
+const projects = [
+  {
+    category: "Deep Learning",
+    title: "Guitar Tablature Generation",
+    desc: "LSTM and feed-forward neural network that predicts optimal guitar tablatures for any input melody — modelling musical intention and fretting difficulty from training data probabilities.",
+    tech: ["Python", "TensorFlow", "Keras"],
+    link: "https://github.com/mandalswarnim",
+  },
+  {
+    category: "Machine Learning",
+    title: "Heart Disease Prediction",
+    desc: "Logistic regression model predicting heart disease likelihood in COVID-19 patients, using clinical and demographic factors including age, smoking status, and cholesterol levels.",
+    tech: ["Python", "Scikit-Learn", "Seaborn", "Matplotlib"],
+    link: "https://github.com/mandalswarnim",
+  },
+  {
+    category: "Deep Learning",
+    title: "Music Genre Classification",
+    desc: "CNN model classifying audio files into 10 genres using MFCC features extracted from the GTZAN dataset, achieving 79% accuracy with custom preprocessing and normalisation.",
+    tech: ["Python", "PyTorch", "Librosa"],
+    link: "https://github.com/mandalswarnim",
+  },
+];
+
+const services = [
+  {
+    num: "01",
+    title: "Full-Stack Web Development",
+    desc: "End-to-end web application development using React, Django, and Node.js. Responsive UIs, RESTful APIs, database design, and CI/CD deployment.",
+    items: ["React & CSS responsive UIs", "RESTful API design", "Django backend", "CI/CD pipeline deployment"],
+  },
+  {
+    num: "02",
+    title: "Machine Learning & AI",
+    desc: "Building and deploying neural networks for audio, vision, and tabular data. Experienced with both research-oriented and production ML workflows.",
+    items: ["Neural network architecture", "Audio & music processing", "Predictive modelling", "TensorFlow & PyTorch"],
+  },
+  {
+    num: "03",
+    title: "Data Analysis",
+    desc: "Transforming raw data into business insight. Statistical analysis, predictive models, automated pipelines, and database management.",
+    items: ["Automated data extraction", "Statistical analysis", "Predictive models", "Database optimisation"],
+  },
+  {
+    num: "04",
+    title: "Mobile Development",
+    desc: "Cross-platform mobile applications using Flutter with Node.js or Django backends. UI/UX design through to backend integration.",
+    items: ["Flutter cross-platform apps", "UI/UX design", "Node.js backend", "API integration"],
+  },
+];
+
+const process = [
+  { step: "01", title: "Discovery", desc: "Understand your goals, constraints, and the problem worth solving." },
+  { step: "02", title: "Planning", desc: "Define scope, architecture, and a realistic roadmap." },
+  { step: "03", title: "Development", desc: "Build iteratively with clean, tested, documented code." },
+  { step: "04", title: "Delivery", desc: "Deploy, monitor, hand off — and stay available." },
+];
+
 export default function Services() {
-  const services = [
-    {
-      title: "Full-Stack Web Development",
-      description: "Building responsive, cross-device compatible web applications with modern frameworks.",
-      features: [
-        "React & CSS Responsive UIs",
-        "RESTful API Development",
-        "Django Backend Integration",
-        "CI/CD Pipeline Deployment",
-      ],
-      icon: "💻",
-    },
-    {
-      title: "Machine Learning & AI",
-      description: "Developing intelligent systems using neural networks and deep learning frameworks.",
-      features: [
-        "Neural Network Development",
-        "Audio & Music Processing",
-        "Predictive Modeling",
-        "TensorFlow & PyTorch Implementation",
-      ],
-      icon: "🤖",
-    },
-    {
-      title: "Data Analysis & Processing",
-      description: "Extracting insights from complex datasets using statistical analysis and automation.",
-      features: [
-        "Automated Data Extraction",
-        "Statistical Analysis",
-        "Predictive Models",
-        "Database Management",
-      ],
-      icon: "📊",
-    },
-    {
-      title: "Mobile App Development",
-      description: "Creating intuitive mobile experiences with Flutter and cross-platform solutions.",
-      features: [
-        "Flutter Development",
-        "UI/UX Design",
-        "Node.js Backend",
-        "Cross-Platform Apps",
-      ],
-      icon: "📱",
-    },
-  ];
-
-  const projects = [
-    {
-      title: "Generating Guitar Tablatures with Neural Networks",
-      category: "Machine Learning",
-      description: "Automated prediction of optimal guitar tablatures for input melodies using LSTM and Feed-forward Neural Networks with musical intention and fretting difficulty estimation",
-      tech: ["Python", "TensorFlow", "Keras"],
-      link: "#",
-    },
-    {
-      title: "Heart Disease Prediction for COVID-19 Patients",
-      category: "Machine Learning",
-      description: "Logistic regression model predicting heart disease likelihood in COVID-19 affected individuals based on clinical and demographic factors",
-      tech: ["Python", "Scikit-Learn", "Seaborn", "Matplotlib"],
-      link: "#",
-    },
-    {
-      title: "Music Genre Classification",
-      category: "Deep Learning",
-      description: "CNN model classifying audio files into 10 genres using MFCC features, achieving 79% accuracy on the GTZAN dataset",
-      tech: ["Python", "PyTorch", "Librosa"],
-      link: "#",
-    },
-  ];
-
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 via-background to-gray-900">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Services</h1>
-            <p className="text-xl text-gray-300 leading-relaxed">
-              Comprehensive software solutions from AI development to full-stack applications
+
+      {/* ── Hero ─────────────────────────────────────────── */}
+      <section className="py-24 border-b border-divider">
+        <div className="max-w-6xl mx-auto px-6">
+          <FadeIn>
+            <p className="text-sm font-medium text-primary uppercase tracking-widest mb-6">
+              Work
             </p>
-          </div>
+            <h1 className="font-serif text-5xl md:text-6xl font-bold text-foreground leading-[1.1] mb-6">
+              What I build
+            </h1>
+            <p className="text-lg text-muted max-w-2xl leading-relaxed">
+              A selection of projects and the services I offer. From production web apps to
+              research-grade machine learning models.
+            </p>
+          </FadeIn>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="bg-gray-900 p-8 rounded-lg border border-gray-800 hover:border-primary transition-all hover:shadow-xl hover:shadow-primary/10"
-              >
-                <div className="text-5xl mb-6">{service.icon}</div>
-                <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-                <p className="text-gray-400 mb-6">{service.description}</p>
-                <ul className="space-y-2">
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start">
-                      <span className="text-primary mr-2">✓</span>
-                      <span className="text-gray-300">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── Featured Projects ─────────────────────────────── */}
+      <section className="py-24 border-b border-divider">
+        <div className="max-w-6xl mx-auto px-6">
+          <FadeIn>
+            <h2 className="font-serif text-3xl font-bold text-foreground mb-14">
+              Featured Projects
+            </h2>
+          </FadeIn>
 
-      {/* Project Gallery */}
-      <section className="py-20 bg-gray-900/50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Featured Projects</h2>
-            <p className="text-gray-400 text-lg">A selection of projects I&apos;ve worked on</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className="bg-background p-6 rounded-lg border border-gray-800 hover:border-primary transition-all"
-              >
-                <div className="text-sm text-primary font-semibold mb-3">{project.category}</div>
-                <h3 className="text-xl font-bold mb-3">{project.title}</h3>
-                <p className="text-gray-400 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="bg-gray-800 px-3 py-1 rounded-full text-xs text-gray-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+          <StaggerContainer className="grid md:grid-cols-3 gap-6">
+            {projects.map((project) => (
+              <StaggerItem key={project.title}>
+                <div className="flex flex-col bg-surface rounded-2xl p-6 border border-divider hover:border-foreground/20 hover:shadow-md transition-all h-full">
+                  <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-3">
+                    {project.category}
+                  </span>
+                  <h3 className="font-medium text-foreground leading-snug mb-3">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-muted leading-relaxed mb-6 flex-1">
+                    {project.desc}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {project.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="text-xs bg-background text-subtle border border-divider px-2.5 py-1 rounded-full"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                  >
+                    View on GitHub <span className="text-xs">↗</span>
+                  </a>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
-        </div>
-      </section>
+          </StaggerContainer>
 
-      {/* Process Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold mb-12 text-center">My Process</h2>
-            <div className="grid md:grid-cols-4 gap-8">
-              {[
-                { step: "01", title: "Discovery", desc: "Understanding your needs and goals" },
-                { step: "02", title: "Planning", desc: "Creating a roadmap and strategy" },
-                { step: "03", title: "Development", desc: "Building with best practices" },
-                { step: "04", title: "Delivery", desc: "Testing, deployment, and support" },
-              ].map((item, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-4xl font-bold text-primary mb-4">{item.step}</div>
-                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                  <p className="text-gray-400">{item.desc}</p>
-                </div>
-              ))}
+          <FadeIn delay={0.3}>
+            <div className="mt-8">
+              <a
+                href="https://github.com/mandalswarnim"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-divider text-foreground text-sm font-medium px-5 py-2.5 rounded-full hover:border-foreground/40 transition-colors"
+              >
+                All repositories on GitHub ↗
+              </a>
             </div>
-          </div>
+          </FadeIn>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gray-900/50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6">Ready to Start Your Project?</h2>
-            <p className="text-xl text-gray-300 mb-8">
-              Let&apos;s discuss how I can help bring your ideas to life
-            </p>
-            <Link
-              href="/contact"
-              className="inline-block bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors"
-            >
-              Get In Touch
-            </Link>
-          </div>
+      {/* ── Services ─────────────────────────────────────── */}
+      <section className="py-24 border-b border-divider bg-surface">
+        <div className="max-w-6xl mx-auto px-6">
+          <FadeIn>
+            <h2 className="font-serif text-3xl font-bold text-foreground mb-14">
+              Services
+            </h2>
+          </FadeIn>
+
+          <StaggerContainer className="divide-y divide-divider border-t border-divider">
+            {services.map((svc) => (
+              <StaggerItem key={svc.num}>
+                <div className="grid md:grid-cols-[64px_1fr_1fr] gap-8 py-10">
+                  <span className="text-xs font-mono text-subtle pt-1">{svc.num}</span>
+                  <div>
+                    <h3 className="font-medium text-foreground mb-2">{svc.title}</h3>
+                    <p className="text-sm text-muted leading-relaxed">{svc.desc}</p>
+                  </div>
+                  <ul className="space-y-2">
+                    {svc.items.map((item) => (
+                      <li key={item} className="flex items-center gap-2 text-sm text-muted">
+                        <span className="w-1 h-1 rounded-full bg-divider shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+          <div className="border-t border-divider" />
         </div>
       </section>
+
+      {/* ── Process ──────────────────────────────────────── */}
+      <section className="py-24 border-b border-divider">
+        <div className="max-w-6xl mx-auto px-6">
+          <FadeIn>
+            <h2 className="font-serif text-3xl font-bold text-foreground mb-14">
+              How I work
+            </h2>
+          </FadeIn>
+
+          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            {process.map((step) => (
+              <StaggerItem key={step.step}>
+                <div>
+                  <span className="text-xs font-mono text-subtle block mb-4">{step.step}</span>
+                  <h3 className="font-medium text-foreground mb-2">{step.title}</h3>
+                  <p className="text-sm text-muted leading-relaxed">{step.desc}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* ── CTA ──────────────────────────────────────────── */}
+      <section className="py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <FadeIn>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+              <div>
+                <h2 className="font-serif text-3xl font-bold text-foreground mb-2">
+                  Ready to start?
+                </h2>
+                <p className="text-muted">Let&apos;s discuss your project.</p>
+              </div>
+              <Link
+                href="/contact"
+                className="inline-flex items-center bg-foreground text-background text-sm font-medium px-6 py-3 rounded-full hover:bg-foreground/80 transition-colors whitespace-nowrap"
+              >
+                Get in touch
+              </Link>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
     </div>
   );
 }

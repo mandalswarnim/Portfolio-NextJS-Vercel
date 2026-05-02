@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllPosts, getCategories } from "@/lib/blog";
+import FadeIn from "@/components/animations/FadeIn";
 
 export const metadata: Metadata = {
-  title: "Blog - Swarnim Mandal",
-  description: "Articles about web development, AI, and software engineering",
+  title: "Blog — Swarnim Mandal",
+  description: "Articles on web development, machine learning, and software engineering.",
 };
 
 export default function Blog() {
@@ -13,89 +14,100 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 via-background to-gray-900">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Blog</h1>
-            <p className="text-xl text-gray-300 leading-relaxed">
-              Thoughts on web development, AI, and software engineering
+
+      {/* ── Hero ─────────────────────────────────────────── */}
+      <section className="py-24 border-b border-divider">
+        <div className="max-w-6xl mx-auto px-6">
+          <FadeIn>
+            <p className="text-sm font-medium text-primary uppercase tracking-widest mb-6">
+              Blog
             </p>
-          </div>
+            <h1 className="font-serif text-5xl md:text-6xl font-bold text-foreground leading-[1.1] mb-6">
+              Writing
+            </h1>
+            <p className="text-lg text-muted max-w-xl leading-relaxed">
+              Thoughts on software engineering, machine learning, and building things that matter.
+            </p>
+          </FadeIn>
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="py-8 bg-gray-900/50">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-primary text-white px-6 py-2 rounded-full font-semibold">
-              All Posts
-            </button>
-            {categories.map((category) => (
-              <button
-                key={category}
-                className="bg-gray-800 hover:bg-gray-700 text-gray-300 px-6 py-2 rounded-full transition-colors"
-              >
-                {category}
+      {/* ── Category pills ───────────────────────────────── */}
+      {categories.length > 0 && (
+        <section className="py-6 border-b border-divider bg-surface">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="flex flex-wrap gap-2">
+              <button className="text-xs font-medium bg-foreground text-background px-4 py-1.5 rounded-full">
+                All
               </button>
-            ))}
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  className="text-xs font-medium border border-divider text-muted px-4 py-1.5 rounded-full hover:border-foreground/30 hover:text-foreground transition-colors"
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
+        </section>
+      )}
+
+      {/* ── Posts ────────────────────────────────────────── */}
+      <section className="py-20">
+        <div className="max-w-6xl mx-auto px-6">
+          {posts.length === 0 ? (
+            <FadeIn>
+              <div className="text-center py-20">
+                <p className="text-muted text-lg mb-2">No posts yet.</p>
+                <p className="text-subtle text-sm">Check back soon.</p>
+              </div>
+            </FadeIn>
+          ) : (
+            <div className="divide-y divide-divider border-t border-divider">
+              {posts.map((post, i) => (
+                <FadeIn key={post.slug} delay={i * 0.05}>
+                  <article className="py-8 group">
+                    <Link href={`/blog/${post.slug}`} className="block">
+                      <div className="flex flex-wrap items-start justify-between gap-4">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-wrap items-center gap-3 mb-3">
+                            <span className="text-xs font-semibold text-primary uppercase tracking-wider">
+                              {post.category}
+                            </span>
+                            <span className="text-subtle text-xs">·</span>
+                            <span className="text-xs text-subtle">{post.readTime}</span>
+                          </div>
+                          <h2 className="font-serif text-2xl font-bold text-foreground group-hover:text-primary transition-colors leading-snug mb-3">
+                            {post.title}
+                          </h2>
+                          <p className="text-sm text-muted leading-relaxed line-clamp-2 max-w-2xl">
+                            {post.excerpt}
+                          </p>
+                        </div>
+                        <div className="shrink-0 text-right">
+                          <time className="text-xs text-subtle font-mono">
+                            {new Date(post.date).toLocaleDateString("en-GB", {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            })}
+                          </time>
+                          <p className="text-sm text-primary mt-2 group-hover:underline underline-offset-4">
+                            Read →
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+                  </article>
+                </FadeIn>
+              ))}
+            </div>
+          )}
+          {posts.length > 0 && <div className="border-t border-divider" />}
         </div>
       </section>
 
-      {/* Blog Posts */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto space-y-8">
-            {posts.map((post) => (
-              <article
-                key={post.slug}
-                className="bg-gray-900 p-8 rounded-lg border border-gray-800 hover:border-primary transition-all"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="text-primary font-semibold">{post.category}</span>
-                  <span className="text-gray-500">•</span>
-                  <span className="text-gray-400">{post.readTime}</span>
-                  <span className="text-gray-500">•</span>
-                  <time className="text-gray-400">
-                    {new Date(post.date).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </time>
-                </div>
-                <Link href={`/blog/${post.slug}`}>
-                  <h2 className="text-3xl font-bold mb-4 hover:text-primary transition-colors">
-                    {post.title}
-                  </h2>
-                </Link>
-                <p className="text-gray-400 mb-6">{post.excerpt}</p>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="inline-flex items-center text-primary hover:text-primary/80 font-semibold"
-                >
-                  Read more
-                  <svg
-                    className="w-5 h-5 ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

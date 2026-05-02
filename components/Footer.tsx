@@ -1,77 +1,87 @@
 import Link from "next/link";
+import SMMonogram from "@/components/SMMonogram";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 border-t border-gray-800">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* About Section */}
-          <div>
-            <h3 className="text-xl font-bold text-primary mb-4">Swarnim Mandal</h3>
-            <p className="text-gray-400">
-              MSc Software Engineering student at University of West London. Full-Stack Developer & Machine Learning enthusiast.
-            </p>
-            <p className="text-gray-400 mt-2 text-sm">
-              London, United Kingdom
+    <footer className="border-t border-divider bg-background">
+      <div className="max-w-6xl mx-auto px-6 py-14">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
+          <div className="col-span-2 md:col-span-1">
+            <div className="mb-4">
+              <SMMonogram size={32} />
+            </div>
+            <p className="text-sm text-muted leading-relaxed max-w-[200px]">
+              Software engineer and ML researcher based in London.
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-gray-400 hover:text-primary transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-gray-400 hover:text-primary transition-colors">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="text-gray-400 hover:text-primary transition-colors">
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="text-gray-400 hover:text-primary transition-colors">
-                  Blog
-                </Link>
-              </li>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-subtle mb-5">
+              Navigate
+            </h4>
+            <ul className="space-y-3">
+              {[
+                { name: "Home", href: "/" },
+                { name: "About", href: "/about" },
+                { name: "Work", href: "/services" },
+                { name: "Blog", href: "/blog" },
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-muted hover:text-foreground transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Services */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Expertise</h4>
-            <ul className="space-y-2">
-              <li className="text-gray-400">Full-Stack Development</li>
-              <li className="text-gray-400">Machine Learning & AI</li>
-              <li className="text-gray-400">Data Analysis</li>
-              <li className="text-gray-400">Mobile Development</li>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-subtle mb-5">
+              Expertise
+            </h4>
+            <ul className="space-y-3 text-sm text-muted">
+              <li>Full-Stack Development</li>
+              <li>Machine Learning</li>
+              <li>Data Analysis</li>
+              <li>Mobile Development</li>
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Connect</h4>
-            <ul className="space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-subtle mb-5">
+              Connect
+            </h4>
+            <ul className="space-y-3">
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-primary transition-colors">
-                  Contact Me
-                </Link>
+                <a
+                  href="mailto:mswarnim1@gmail.com"
+                  className="text-sm text-muted hover:text-foreground transition-colors"
+                >
+                  Email
+                </a>
               </li>
               <li>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors">
+                <a
+                  href="https://github.com/mandalswarnim"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted hover:text-foreground transition-colors"
+                >
                   GitHub
                 </a>
               </li>
               <li>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors">
+                <a
+                  href="https://www.linkedin.com/in/swarnim-mandal-678976259/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted hover:text-foreground transition-colors"
+                >
                   LinkedIn
                 </a>
               </li>
@@ -79,8 +89,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; {currentYear} Swarnim Mandal. All rights reserved.</p>
+        <div className="border-t border-divider pt-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-sm text-subtle">© {year} Swarnim Mandal. All rights reserved.</p>
+          <p className="text-sm text-subtle">London, United Kingdom</p>
         </div>
       </div>
     </footer>

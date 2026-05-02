@@ -1,224 +1,290 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import FadeIn from "@/components/animations/FadeIn";
+import StaggerContainer from "@/components/animations/StaggerContainer";
+import StaggerItem from "@/components/animations/StaggerItem";
 
 export const metadata: Metadata = {
-  title: "About - Swarnim Mandal",
-  description: "Learn more about Swarnim Mandal, a Software Engineering student specializing in AI and software development",
+  title: "About — Swarnim Mandal",
+  description:
+    "MSc Software Engineering student at University of West London. Full-stack developer and machine learning engineer based in London.",
 };
 
+const skills = [
+  { category: "Languages", items: ["Python", "C#", "C", "Java", "Dart"] },
+  {
+    category: "Frameworks & Libraries",
+    items: ["React", "Django", "Node.js", "Flutter", "TensorFlow", "Keras", "PyTorch", "Selenium", "Beautiful Soup"],
+  },
+  {
+    category: "Tools & Platforms",
+    items: ["Git", "GitHub", "Figma", "VS Code", "Talend", "Jira"],
+  },
+  { category: "Databases", items: ["MySQL", "MongoDB"] },
+];
+
+const timeline = [
+  {
+    period: "Feb 2025 — Present",
+    role: "MSc Software Engineering",
+    org: "University of West London",
+    location: "London, England",
+    type: "education",
+    points: [
+      "Advanced software development practices and cutting-edge engineering methods.",
+      "Coursework spanning distributed systems, AI, and modern software architecture.",
+    ],
+  },
+  {
+    period: "Feb 2025 — Present",
+    role: "Receptionist",
+    org: "Oriental Club",
+    location: "London, UK",
+    type: "work",
+    points: [
+      "Engaged with high-profile members including diplomats and business leaders, strengthening stakeholder communication.",
+      "Prepared daily management reports and assisted in revenue forecasting using data-driven insights.",
+    ],
+  },
+  {
+    period: "Jan 2024 — Dec 2024",
+    role: "Full-Stack Developer",
+    org: "Aankhijhyal Technologies",
+    location: "Pokhara, Nepal",
+    type: "work",
+    points: [
+      "Built responsive UIs with React & CSS, ensuring cross-device compatibility.",
+      "Developed RESTful APIs and optimised databases using Django for seamless backend integration.",
+      "Deployed applications via CI/CD pipelines, improving scalability and release reliability.",
+    ],
+  },
+  {
+    period: "Sep 2023 — Dec 2023",
+    role: "UI/UX Designer",
+    org: "Eversoft",
+    location: "Pokhara, Nepal",
+    type: "work",
+    points: [
+      "Contributed to a mobile application using Flutter, delivering end-to-end UI/UX solutions.",
+      "Supported Node.js backend development and guided team members on best practices.",
+    ],
+  },
+  {
+    period: "Sep 2023 — Dec 2023",
+    role: "Private Tutor — Grade 12",
+    org: "Independent",
+    location: "Pokhara, Nepal",
+    type: "work",
+    points: [
+      "Delivered targeted instruction in Chemistry and Nepali, achieving a 100% NEB exam pass rate.",
+      "Created customised study materials aligned with the NEB curriculum to address individual learning gaps.",
+    ],
+  },
+  {
+    period: "Apr 2022 — Jun 2022",
+    role: "Data Analyst",
+    org: "Scretus",
+    location: "Remote, Bengaluru, India",
+    type: "work",
+    points: [
+      "Extracted, cleaned, and analysed datasets using automated tools, maintaining data integrity.",
+      "Built predictive models and conducted statistical analysis to surface business performance trends.",
+    ],
+  },
+  {
+    period: "Aug 2018 — Apr 2023",
+    role: "B.Tech Computer Science & Engineering",
+    org: "Jawaharlal Nehru Technological University Kakinada",
+    location: "Kakinada, India",
+    type: "education",
+    points: ["CGPA: 7.3/10. Comprehensive coursework across software engineering, algorithms, and emerging technologies."],
+  },
+];
+
 export default function About() {
-  const skills = [
-    { category: "Programming Languages", items: ["Python", "C#", "C", "Java", "Dart"] },
-    { category: "Frameworks & Libraries", items: ["Flutter", "Selenium", "Beautiful Soup", "TensorFlow", "Keras", "PyTorch", "Node.js", "Django", "React"] },
-    { category: "Tools & Platforms", items: ["Git", "VS Code", "Talend", "Figma", "GitHub", "Jira"] },
-    { category: "Databases", items: ["MySQL", "MongoDB"] },
-  ];
-
-  const education = [
-    {
-      degree: "Software Engineering MSc.",
-      institution: "University of West London",
-      location: "London, England",
-      period: "February 2025 - Present",
-      description: "Currently pursuing Master's degree in Software Engineering, focusing on advanced software development practices and cutting-edge technologies.",
-    },
-    {
-      degree: "Computer Science and Engineering B.Tech",
-      institution: "Jawaharlal Nehru Technological University Kakinada",
-      location: "Kakinada, India",
-      period: "August 2018 - April 2023",
-      description: "CGPA: 7.3/10. Completed comprehensive coursework in computer science fundamentals, software engineering, and emerging technologies.",
-    },
-    {
-      degree: "Higher Secondary School",
-      institution: "Shree Amarsingh Model Higher Secondary School",
-      location: "Pokhara, Nepal",
-      period: "July 2016 - August 2018",
-      description: "GPA: 3.2/4. Built strong foundation in mathematics and sciences.",
-    },
-  ];
-
-  const experience = [
-    {
-      title: "Receptionist",
-      company: "Oriental Club",
-      location: "London, United Kingdom",
-      period: "February 2025 - Present",
-      points: [
-        "Engaged with high-profile members (Diplomats and business leaders), strengthening communication and stakeholder management.",
-        "Prepared daily management reports, enhancing organization and analytical accuracy.",
-        "Assisted in revenue forecasting and performance analysis, applying data-driven insights.",
-        "Coordinated across departments to resolve issues, showcasing teamwork and leadership potential.",
-      ],
-    },
-    {
-      title: "Full-Stack Developer",
-      company: "Aankhijhyal Technologies",
-      location: "Pokhara, Nepal",
-      period: "January 2024 - December 2024",
-      points: [
-        "Built responsive UIs with React & CSS, ensuring cross-device compatibility.",
-        "Developed RESTful APIs & optimized databases using Django for seamless integration.",
-        "Debugged & resolved full-stack issues, maintaining high-performance applications.",
-        "Deployed apps via CI/CD pipelines, enhancing scalability & reliability.",
-      ],
-    },
-    {
-      title: "UI/UX Designer",
-      company: "Eversoft",
-      location: "Pokhara, Nepal",
-      period: "September 2023 - December 2023",
-      points: [
-        "Contributing to a real project using Flutter, displaying a deep understanding of mobile app development.",
-        "Creating innovative UI/UX solutions to improve user experience.",
-        "Demonstrating proficiency in Node.js, helping with the development of the back-end of the Mobile Application.",
-        "Collaborating effectively with the team, offering valuable insights and creative solutions during brainstorming sessions.",
-      ],
-    },
-    {
-      title: "Data Analyst",
-      company: "Scretus",
-      location: "Remote, Bengaluru, India",
-      period: "April 2022 - June 2022",
-      points: [
-        "Extracted and cleaned data using automated tools for accurate analysis.",
-        "Developed and maintained databases, ensuring data integrity and accessibility.",
-        "Conducted statistical analysis and built predictive models to identify trends.",
-        "Evaluated business performance by quantifying key metrics and benchmarking results.",
-      ],
-    },
-  ];
-
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 via-background to-gray-900">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">About Me</h1>
-            <p className="text-xl text-gray-300 leading-relaxed">
-              MSc Software Engineering student at University of West London with expertise in full-stack development,
-              machine learning, and data analysis. Based in London, United Kingdom.
-            </p>
-          </div>
-        </div>
-      </section>
 
-      {/* Story Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold mb-8">My Story</h2>
-            <div className="space-y-6 text-gray-300 text-lg leading-relaxed">
-              <p>
-                I&apos;m currently pursuing a Master&apos;s degree in Software Engineering at the University of West London
-                while working as a Receptionist at the prestigious Oriental Club, where I engage with high-profile
-                members and apply data-driven insights to business operations.
-              </p>
-              <p>
-                My professional journey includes diverse roles across full-stack development, UI/UX design, and
-                data analysis. At Aankhijhyal Technologies, I built responsive applications using React and Django,
-                while at Eversoft, I contributed to mobile app development with Flutter. My internship at Scretus
-                honed my skills in statistical analysis and predictive modeling.
-              </p>
-              <p>
-                I&apos;m passionate about leveraging machine learning and AI to solve complex problems. My projects
-                include developing neural networks for guitar tablature generation, predicting heart disease in
-                COVID-affected individuals, and classifying music genres using deep learning. I combine technical
-                expertise with strong communication skills to deliver impactful solutions.
-              </p>
+      {/* ── Hero ─────────────────────────────────────────── */}
+      <section className="py-24 border-b border-divider">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            <div>
+              <FadeIn>
+                <p className="text-sm font-medium text-primary uppercase tracking-widest mb-6">
+                  About
+                </p>
+                <h1 className="font-serif text-5xl md:text-6xl font-bold text-foreground leading-[1.1] mb-6">
+                  Swarnim<br />Mandal
+                </h1>
+                <p className="text-lg text-muted leading-relaxed max-w-lg">
+                  Software engineer with a background spanning full-stack
+                  development, machine learning, and data analysis. Currently
+                  pursuing an MSc at the University of West London.
+                </p>
+              </FadeIn>
             </div>
+
+            <FadeIn delay={0.15} direction="left">
+              <div className="bg-surface rounded-2xl p-8 border border-divider space-y-5">
+                {[
+                  { label: "Location", value: "London, United Kingdom" },
+                  { label: "Education", value: "MSc Software Engineering, UWL" },
+                  { label: "Email", value: "mswarnim1@gmail.com", href: "mailto:mswarnim1@gmail.com" },
+                  { label: "GitHub", value: "mandalswarnim", href: "https://github.com/mandalswarnim" },
+                  { label: "LinkedIn", value: "swarnim-mandal", href: "https://www.linkedin.com/in/swarnim-mandal-678976259/" },
+                ].map((item) => (
+                  <div key={item.label} className="flex justify-between items-start gap-4 border-b border-divider pb-5 last:border-0 last:pb-0">
+                    <span className="text-sm text-subtle">{item.label}</span>
+                    {item.href ? (
+                      <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="text-sm text-foreground hover:text-primary transition-colors text-right">
+                        {item.value}
+                      </a>
+                    ) : (
+                      <span className="text-sm text-foreground text-right">{item.value}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section className="py-20 bg-gray-900/50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold mb-12 text-center">Skills & Technologies</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              {skills.map((skillGroup, index) => (
-                <div key={index} className="bg-background p-6 rounded-lg border border-gray-800">
-                  <h3 className="text-2xl font-bold text-primary mb-4">{skillGroup.category}</h3>
+      {/* ── Story ────────────────────────────────────────── */}
+      <section className="py-24 border-b border-divider">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-3xl">
+            <FadeIn>
+              <h2 className="font-serif text-3xl font-bold text-foreground mb-8">My story</h2>
+              <div className="space-y-5 text-muted text-base leading-relaxed">
+                <p>
+                  I grew up in Pokhara, Nepal, and pursued a Computer Science degree in India before
+                  moving to London in early 2025 to study Software Engineering at the University of
+                  West London. My path has taken me across three countries, four roles, and multiple
+                  domains — from building production web apps to training neural networks that generate music.
+                </p>
+                <p>
+                  At Aankhijhyal Technologies I shipped full-stack applications using React and Django.
+                  At Eversoft I designed mobile interfaces with Flutter. At Scretus I built data pipelines
+                  and predictive models from raw datasets. Each role deepened a different skill but
+                  reinforced the same conviction: the best solutions sit at the intersection of
+                  engineering rigour and clear thinking about the problem.
+                </p>
+                <p>
+                  Outside work I explore audio ML — two of my three public projects involve music
+                  (guitar tablature generation and genre classification). I'm interested in how machine
+                  learning can model creativity, not just categorise it.
+                </p>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Skills ───────────────────────────────────────── */}
+      <section className="py-24 border-b border-divider bg-surface">
+        <div className="max-w-6xl mx-auto px-6">
+          <FadeIn>
+            <h2 className="font-serif text-3xl font-bold text-foreground mb-14">
+              Skills & Technologies
+            </h2>
+          </FadeIn>
+          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            {skills.map((group) => (
+              <StaggerItem key={group.category}>
+                <div>
+                  <h3 className="text-xs font-semibold uppercase tracking-widest text-subtle mb-5">
+                    {group.category}
+                  </h3>
                   <div className="flex flex-wrap gap-2">
-                    {skillGroup.items.map((skill, skillIndex) => (
+                    {group.items.map((skill) => (
                       <span
-                        key={skillIndex}
-                        className="bg-gray-800 px-4 py-2 rounded-full text-sm"
+                        key={skill}
+                        className="text-sm bg-background text-muted border border-divider px-3 py-1.5 rounded-full"
                       >
                         {skill}
                       </span>
                     ))}
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Education Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold mb-12">Education</h2>
-            {education.map((edu, index) => (
-              <div key={index} className="border-l-4 border-primary pl-8 pb-8">
-                <h3 className="text-2xl font-bold mb-2">{edu.degree}</h3>
-                <div className="text-primary font-semibold mb-1">{edu.institution}</div>
-                <div className="text-gray-500 text-sm mb-2">{edu.location}</div>
-                <div className="text-gray-400 mb-4">{edu.period}</div>
-                <p className="text-gray-300">{edu.description}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
-      {/* Experience Section */}
-      <section className="py-20 bg-gray-900/50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold mb-12">Experience</h2>
-            <div className="space-y-8">
-              {experience.map((exp, index) => (
-                <div key={index} className="border-l-4 border-primary pl-8 pb-8">
-                  <h3 className="text-2xl font-bold mb-2">{exp.title}</h3>
-                  <div className="text-primary font-semibold mb-1">{exp.company}</div>
-                  <div className="text-gray-500 text-sm mb-2">{exp.location}</div>
-                  <div className="text-gray-400 mb-4">{exp.period}</div>
-                  <ul className="space-y-2">
-                    {exp.points.map((point, pointIndex) => (
-                      <li key={pointIndex} className="flex items-start text-gray-300">
-                        <span className="text-primary mr-2 mt-1">•</span>
+      {/* ── Timeline ─────────────────────────────────────── */}
+      <section className="py-24 border-b border-divider">
+        <div className="max-w-6xl mx-auto px-6">
+          <FadeIn>
+            <h2 className="font-serif text-3xl font-bold text-foreground mb-14">
+              Experience & Education
+            </h2>
+          </FadeIn>
+
+          <div className="max-w-3xl space-y-0 divide-y divide-divider border-t border-divider">
+            {timeline.map((item, i) => (
+              <FadeIn key={i} delay={i * 0.05}>
+                <div className="py-8">
+                  <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
+                    <div>
+                      <h3 className="font-medium text-foreground">{item.role}</h3>
+                      <div className="flex flex-wrap items-center gap-2 mt-1">
+                        <span className="text-sm text-primary">{item.org}</span>
+                        <span className="text-subtle text-xs">·</span>
+                        <span className="text-sm text-subtle">{item.location}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className={`text-xs px-2.5 py-1 rounded-full border ${
+                        item.type === "education"
+                          ? "border-primary/30 text-primary bg-primary/5"
+                          : "border-divider text-subtle bg-surface"
+                      }`}>
+                        {item.type === "education" ? "Education" : "Work"}
+                      </span>
+                      <span className="text-xs text-subtle font-mono whitespace-nowrap">{item.period}</span>
+                    </div>
+                  </div>
+                  <ul className="space-y-1.5 mt-4">
+                    {item.points.map((point, pi) => (
+                      <li key={pi} className="flex gap-3 text-sm text-muted leading-relaxed">
+                        <span className="text-divider mt-1.5 shrink-0">—</span>
                         <span>{point}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-              ))}
-            </div>
+              </FadeIn>
+            ))}
           </div>
+          <div className="border-t border-divider" />
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6">Let&apos;s Work Together</h2>
-            <p className="text-xl text-gray-300 mb-8">
-              I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-            </p>
-            <a
-              href="/contact"
-              className="inline-block bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors"
-            >
-              Get In Touch
-            </a>
-          </div>
+      {/* ── CTA ──────────────────────────────────────────── */}
+      <section className="py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <FadeIn>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+              <div>
+                <h2 className="font-serif text-3xl font-bold text-foreground mb-2">
+                  Let&apos;s work together
+                </h2>
+                <p className="text-muted">Open to roles, projects, and collaborations.</p>
+              </div>
+              <Link
+                href="/contact"
+                className="inline-flex items-center bg-foreground text-background text-sm font-medium px-6 py-3 rounded-full hover:bg-foreground/80 transition-colors whitespace-nowrap"
+              >
+                Get in touch
+              </Link>
+            </div>
+          </FadeIn>
         </div>
       </section>
+
     </div>
   );
 }
