@@ -8,16 +8,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#d4a574",
-        secondary: "#6b8eb5",
-        accent: "#c9a870",
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "#FAF8F4",
+        foreground: "#1C1612",
+        surface: "#F0EBE3",
+        divider: "#E2D9CE",
+        primary: "#2D5FA3",
+        muted: "#6B6259",
+        subtle: "#9B9088",
       },
-      backgroundImage: {
-        'renaissance': "url('/background.jpg')",
+      fontFamily: {
+        serif: ["var(--font-playfair)", "Georgia", "serif"],
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
     },
   },
   plugins: [],
-}
+};
