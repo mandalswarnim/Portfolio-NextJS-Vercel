@@ -27,11 +27,7 @@ export default function Header() {
       initial={{ y: -56, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-divider"
-          : "bg-transparent"
-      }`}
+      className="fixed top-0 w-full z-50 bg-white border-b border-divider"
     >
       <nav className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" aria-label="Home">
