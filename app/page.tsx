@@ -23,19 +23,29 @@ const expertise = [
   },
 ];
 
-const projects = [
+type Project = {
+  category: string;
+  title: string;
+  desc: string;
+  tech: string[];
+  link: string;
+  demo?: string;
+};
+
+const projects: Project[] = [
+  {
+    category: "Deep Learning",
+    title: "UAV Predictive Maintenance Digital Twin",
+    desc: "LSTM, Transformer, and 1D-CNN models forecasting Remaining Useful Life on NASA C-MAPSS turbofans and a synthetic UAV fleet — with an interactive 3D dashboard and explainable-AI diagnostics.",
+    tech: ["PyTorch", "Next.js", "Three.js"],
+    link: "https://github.com/mandalswarnim",
+    demo: "/uav",
+  },
   {
     category: "Deep Learning",
     title: "Guitar Tablature Generation",
     desc: "LSTM and feed-forward neural network that predicts optimal guitar tablatures for any input melody, modelling musical intention and fretting difficulty.",
     tech: ["Python", "TensorFlow", "Keras"],
-    link: "https://github.com/mandalswarnim",
-  },
-  {
-    category: "Machine Learning",
-    title: "Heart Disease Prediction",
-    desc: "Logistic regression model predicting heart disease likelihood in COVID-19 patients from clinical and demographic data, with full preprocessing pipeline.",
-    tech: ["Python", "Scikit-Learn", "Seaborn"],
     link: "https://github.com/mandalswarnim",
   },
   {
@@ -196,14 +206,24 @@ export default function Home() {
                       </span>
                     ))}
                   </div>
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                  >
-                    View on GitHub <span className="text-xs">↗</span>
-                  </a>
+                  <div className="flex flex-wrap items-center gap-4">
+                    {project.demo && (
+                      <Link
+                        href={project.demo}
+                        className="inline-flex items-center bg-foreground text-background text-sm font-medium px-4 py-2 rounded-full hover:bg-foreground/80 transition-colors"
+                      >
+                        Try me →
+                      </Link>
+                    )}
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    >
+                      View on GitHub <span className="text-xs">↗</span>
+                    </a>
+                  </div>
                 </div>
               </StaggerItem>
             ))}

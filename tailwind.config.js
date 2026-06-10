@@ -15,6 +15,11 @@ module.exports = {
         primary: "#2D5FA3",
         muted: "#6B6259",
         subtle: "#9B9088",
+        status: {
+          nominal: "#4A7C59",
+          warning: "#A8741A",
+          critical: "#A63D2F",
+        },
       },
       fontFamily: {
         serif: ["var(--font-playfair)", "Georgia", "serif"],

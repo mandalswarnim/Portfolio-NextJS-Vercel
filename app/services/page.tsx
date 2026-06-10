@@ -9,7 +9,24 @@ export const metadata: Metadata = {
   description: "Projects, services, and open-source work by Swarnim Mandal.",
 };
 
-const projects = [
+type Project = {
+  category: string;
+  title: string;
+  desc: string;
+  tech: string[];
+  link: string;
+  demo?: string;
+};
+
+const projects: Project[] = [
+  {
+    category: "Deep Learning",
+    title: "UAV Predictive Maintenance Digital Twin",
+    desc: "LSTM, Transformer, and 1D-CNN models forecasting Remaining Useful Life on the NASA C-MAPSS turbofan benchmark and a synthesized multirotor UAV fleet — served as an interactive digital twin with 3D fleet views, live telemetry, and explainable-AI diagnostics.",
+    tech: ["PyTorch", "Next.js", "Three.js", "Transformers"],
+    link: "https://github.com/mandalswarnim",
+    demo: "/uav",
+  },
   {
     category: "Deep Learning",
     title: "Guitar Tablature Generation",
@@ -121,14 +138,24 @@ export default function Services() {
                       </span>
                     ))}
                   </div>
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                  >
-                    View on GitHub <span className="text-xs">↗</span>
-                  </a>
+                  <div className="flex flex-wrap items-center gap-4">
+                    {project.demo && (
+                      <Link
+                        href={project.demo}
+                        className="inline-flex items-center bg-foreground text-background text-sm font-medium px-4 py-2 rounded-full hover:bg-foreground/80 transition-colors"
+                      >
+                        Try me →
+                      </Link>
+                    )}
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    >
+                      View on GitHub <span className="text-xs">↗</span>
+                    </a>
+                  </div>
                 </div>
               </StaggerItem>
             ))}
