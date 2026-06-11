@@ -14,6 +14,7 @@ Built with Next.js 16, React 19, TypeScript, Tailwind CSS, and Framer Motion. De
 | `/blog` | Technical writing (data in `lib/blog.ts`) |
 | `/contact` | Contact form and direct links |
 | `/grace` | Grace marketplace page |
+| `/uav` | UAV predictive-maintenance dashboard (armory, mission, diagnostics, model lab) |
 
 ## Running locally
 
@@ -27,9 +28,9 @@ npm run dev
 
 ```
 app/           # Next.js App Router pages
-components/    # Header, Footer, animation wrappers (FadeIn, Stagger*)
-lib/           # blog.ts — blog post data
-public/        # Static assets (swarnim.jpg, background.jpg)
+components/    # Header, Footer, animation wrappers (FadeIn, Stagger*), uav/ dashboard
+lib/           # blog.ts — blog post data · uav/ — dashboard state + data fetchers
+public/        # Static assets (swarnim.jpg, uav/data/ baked model artifacts)
 ```
 
 ## Scripts
