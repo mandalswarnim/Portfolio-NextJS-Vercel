@@ -13,7 +13,6 @@ Built with Next.js 16, React 19, TypeScript, Tailwind CSS, and Framer Motion. De
 | `/services` | Full project showcase |
 | `/blog` | Technical writing (data in `lib/blog.ts`) |
 | `/contact` | Contact form and direct links |
-| `/grace` | Grace marketplace page |
 | `/uav` | UAV predictive-maintenance dashboard (armory, mission, diagnostics, model lab) |
 
 ## Running locally

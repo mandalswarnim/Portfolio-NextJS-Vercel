@@ -25,7 +25,7 @@ No test suite is configured.
 
 **App Router layout** — `app/layout.tsx` wraps every page with `<Header>` and `<Footer>`, adds 80px top padding via `pt-20` to clear the fixed header.
 
-**Pages:** `app/page.tsx` (home), `app/about/`, `app/services/`, `app/contact/`, `app/blog/`, `app/blog/[slug]/`, `app/grace/` (marketplace side-project page), `app/uav/` (UAV predictive-maintenance dashboard, see below)
+**Pages:** `app/page.tsx` (home), `app/about/`, `app/services/`, `app/contact/`, `app/blog/`, `app/blog/[slug]/`, `app/uav/` (UAV predictive-maintenance dashboard, see below)
 
 **Blog data** lives entirely in `lib/blog.ts` as a hardcoded array of `BlogPost` objects — no CMS or database. To add a post, append to `blogPosts`. The slug drives the URL.
 
