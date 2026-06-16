@@ -41,5 +41,8 @@ next-env.d.ts
 # UAV dashboard source project (separate app; only ported code is tracked)
 /uav_predicition_dashboard/
 
+# AI Receptionist source project (separate Twilio+OpenAI app; only the ported showcase is tracked)
+/Reception App/
+
 # local claude settings
 .claude/

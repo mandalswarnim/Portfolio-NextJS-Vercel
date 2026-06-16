@@ -49,6 +49,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/ai-receptionist`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
     ...['armory', 'mission', 'diagnostics', 'lab'].map((page) => ({
       url: `${baseUrl}/uav/${page}`,
       lastModified: new Date(),

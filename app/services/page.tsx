@@ -20,6 +20,14 @@ type Project = {
 
 const projects: Project[] = [
   {
+    category: "Conversational AI",
+    title: "AI Receptionist",
+    desc: "A production-ready AI receptionist that answers business calls 24/7, captures customer and booking details through natural conversation, and emails structured leads the moment a call ends. Built on Twilio voice, OpenAI, Express, and Prisma — available to integrate into your business.",
+    tech: ["TypeScript", "OpenAI", "Twilio", "Express", "Prisma"],
+    link: "https://github.com/mandalswarnim/ai-receptionist",
+    demo: "/ai-receptionist",
+  },
+  {
     category: "Deep Learning",
     title: "UAV Predictive Maintenance Digital Twin",
     desc: "LSTM, Transformer, and 1D-CNN models forecasting Remaining Useful Life on the NASA C-MAPSS turbofan benchmark and a synthesized multirotor UAV fleet — served as an interactive digital twin with 3D fleet views, live telemetry, and explainable-AI diagnostics.",

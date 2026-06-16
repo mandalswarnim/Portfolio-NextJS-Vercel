@@ -37,6 +37,7 @@
   ],
   "exclude": [
     "node_modules",
-    "uav_predicition_dashboard"
+    "uav_predicition_dashboard",
+    "Reception App"
   ]
 }
