@@ -26,7 +26,6 @@ export default function Footer() {
                 { name: "Home", href: "/" },
                 { name: "About", href: "/about" },
                 { name: "Work", href: "/services" },
-                { name: "Blog", href: "/blog" },
               ].map((item) => (
                 <li key={item.name}>
                   <Link

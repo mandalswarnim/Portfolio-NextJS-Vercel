@@ -1,3 +1,8 @@
+// Blog is hidden site-wide until real essays are ready — flip to true to
+// restore /blog routes and sitemap entries, then re-add the "Blog" links in
+// components/Header.tsx and components/Footer.tsx.
+export const BLOG_ENABLED = false;
+
 export interface BlogPost {
   slug: string;
   title: string;

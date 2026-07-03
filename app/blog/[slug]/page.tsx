@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getPostBySlug, getAllPosts } from "@/lib/blog";
+import { BLOG_ENABLED, getPostBySlug, getAllPosts } from "@/lib/blog";
 import FadeIn from "@/components/animations/FadeIn";
 
 export async function generateStaticParams() {
+  if (!BLOG_ENABLED) return [];
   const posts = getAllPosts();
   return posts.map((post) => ({ slug: post.slug }));
 }
@@ -15,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = BLOG_ENABLED ? getPostBySlug(slug) : undefined;
   if (!post) return { title: "Post Not Found" };
   return {
     title: `${post.title} — Swarnim Mandal`,
@@ -29,7 +30,7 @@ export default async function BlogPost({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = BLOG_ENABLED ? getPostBySlug(slug) : undefined;
   if (!post) notFound();
 
   return (

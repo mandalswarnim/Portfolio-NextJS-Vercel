@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllPosts, getCategories } from "@/lib/blog";
+import { notFound } from "next/navigation";
+import { BLOG_ENABLED, getAllPosts, getCategories } from "@/lib/blog";
 import FadeIn from "@/components/animations/FadeIn";
 
 export const metadata: Metadata = {
@@ -9,6 +10,8 @@ export const metadata: Metadata = {
 };
 
 export default function Blog() {
+  if (!BLOG_ENABLED) notFound();
+
   const posts = getAllPosts();
   const categories = getCategories();
 

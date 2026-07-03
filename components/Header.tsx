@@ -8,7 +8,6 @@ import SMMonogram from "@/components/SMMonogram";
 const navItems = [
   { name: "About", href: "/about" },
   { name: "Work", href: "/services" },
-  { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 

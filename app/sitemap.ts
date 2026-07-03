@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
-import { getAllPosts } from '@/lib/blog';
+import { BLOG_ENABLED, getAllPosts } from '@/lib/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const posts = getAllPosts();
+  const posts = BLOG_ENABLED ? getAllPosts() : [];
   const baseUrl = 'https://swarnimmandal.me';
 
   const blogUrls = posts.map((post) => ({
@@ -31,12 +31,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
+    ...(BLOG_ENABLED
+      ? [
+          {
+            url: `${baseUrl}/blog`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly' as const,
+            priority: 0.8,
+          },
+        ]
+      : []),
     {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),
