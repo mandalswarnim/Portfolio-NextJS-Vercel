@@ -42,6 +42,13 @@ const projects: Project[] = [
     demo: "/ai-receptionist",
   },
   {
+    category: "Aerospace Engineering",
+    title: "Airfoil Selector for Wind Turbines",
+    desc: "A tool that ranks airfoil designs for small vertical-axis wind turbines by annual energy production at a specific site — pairing real wind statistics with NeuralFoil surrogate aerodynamics and generating explainable reports on why one design outperforms another.",
+    tech: ["Python", "NeuralFoil", "Flask"],
+    link: "https://github.com/mandalswarnim/Airfoil-Selector-for-Wind-Turbines",
+  },
+  {
     category: "Deep Learning",
     title: "UAV Predictive Maintenance Digital Twin",
     desc: "LSTM, Transformer, and 1D-CNN models forecasting Remaining Useful Life on NASA C-MAPSS turbofans and a synthetic UAV fleet — with an interactive 3D dashboard and explainable-AI diagnostics.",
