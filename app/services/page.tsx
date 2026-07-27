@@ -28,6 +28,14 @@ const projects: Project[] = [
     demo: "/ai-receptionist",
   },
   {
+    category: "Aerospace Engineering",
+    title: "Airfoil Selector for Wind Turbines",
+    desc: "A tool that ranks airfoil designs for small vertical-axis wind turbines by annual energy production at a specific site — pairing real wind statistics with NeuralFoil surrogate aerodynamics and generating explainable reports on why one design outperforms another.",
+    tech: ["Python", "NeuralFoil", "Gradio", "AeroSandbox"],
+    link: "https://github.com/mandalswarnim/Airfoil-Selector-for-Wind-Turbines",
+    demo: "https://huggingface.co/spaces/mswanrim1/VAWT-Airfoil-Selector",
+  },
+  {
     category: "Deep Learning",
     title: "UAV Predictive Maintenance Digital Twin",
     desc: "LSTM, Transformer, and 1D-CNN models forecasting Remaining Useful Life on the NASA C-MAPSS turbofan benchmark and a synthesized multirotor UAV fleet — served as an interactive digital twin with 3D fleet views, live telemetry, and explainable-AI diagnostics.",
@@ -147,14 +155,24 @@ export default function Services() {
                     ))}
                   </div>
                   <div className="flex flex-wrap items-center gap-4">
-                    {project.demo && (
-                      <Link
-                        href={project.demo}
-                        className="inline-flex items-center bg-foreground text-background text-sm font-medium px-4 py-2 rounded-full hover:bg-foreground/80 transition-colors"
-                      >
-                        Try me →
-                      </Link>
-                    )}
+                    {project.demo &&
+                      (/^https?:\/\//.test(project.demo) ? (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center bg-foreground text-background text-sm font-medium px-4 py-2 rounded-full hover:bg-foreground/80 transition-colors"
+                        >
+                          Try me →
+                        </a>
+                      ) : (
+                        <Link
+                          href={project.demo}
+                          className="inline-flex items-center bg-foreground text-background text-sm font-medium px-4 py-2 rounded-full hover:bg-foreground/80 transition-colors"
+                        >
+                          Try me →
+                        </Link>
+                      ))}
                     <a
                       href={project.link}
                       target="_blank"

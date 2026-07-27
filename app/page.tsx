@@ -45,8 +45,9 @@ const projects: Project[] = [
     category: "Aerospace Engineering",
     title: "Airfoil Selector for Wind Turbines",
     desc: "A tool that ranks airfoil designs for small vertical-axis wind turbines by annual energy production at a specific site — pairing real wind statistics with NeuralFoil surrogate aerodynamics and generating explainable reports on why one design outperforms another.",
-    tech: ["Python", "NeuralFoil", "Flask"],
+    tech: ["Python", "NeuralFoil", "Gradio"],
     link: "https://github.com/mandalswarnim/Airfoil-Selector-for-Wind-Turbines",
+    demo: "https://huggingface.co/spaces/mswanrim1/VAWT-Airfoil-Selector",
   },
   {
     category: "Deep Learning",
@@ -222,14 +223,24 @@ export default function Home() {
                     ))}
                   </div>
                   <div className="flex flex-wrap items-center gap-4">
-                    {project.demo && (
-                      <Link
-                        href={project.demo}
-                        className="inline-flex items-center bg-foreground text-background text-sm font-medium px-4 py-2 rounded-full hover:bg-foreground/80 transition-colors"
-                      >
-                        Try me →
-                      </Link>
-                    )}
+                    {project.demo &&
+                      (/^https?:\/\//.test(project.demo) ? (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center bg-foreground text-background text-sm font-medium px-4 py-2 rounded-full hover:bg-foreground/80 transition-colors"
+                        >
+                          Try me →
+                        </a>
+                      ) : (
+                        <Link
+                          href={project.demo}
+                          className="inline-flex items-center bg-foreground text-background text-sm font-medium px-4 py-2 rounded-full hover:bg-foreground/80 transition-colors"
+                        >
+                          Try me →
+                        </Link>
+                      ))}
                     <a
                       href={project.link}
                       target="_blank"
