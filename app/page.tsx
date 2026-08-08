@@ -113,7 +113,7 @@ export default function Home() {
 
               <FadeIn delay={0.2}>
                 <p className="text-lg text-muted leading-relaxed mb-10 max-w-[480px]">
-                  MSc Software Engineering at University of West London.
+                  MSc Software Engineering, University of West London.
                   Full-stack developer and machine learning engineer with
                   production experience across web, mobile, and AI systems.
                 </p>
@@ -149,8 +149,8 @@ export default function Home() {
                 </div>
                 {/* Floating badge */}
                 <div className="absolute -bottom-4 -left-4 bg-background border border-divider rounded-xl px-4 py-3 shadow-sm">
-                  <p className="text-xs text-subtle">Currently</p>
-                  <p className="text-sm font-medium text-foreground">MSc @ UWL, London</p>
+                  <p className="text-xs text-subtle">Based in</p>
+                  <p className="text-sm font-medium text-foreground">London, United Kingdom</p>
                 </div>
               </div>
             </FadeIn>

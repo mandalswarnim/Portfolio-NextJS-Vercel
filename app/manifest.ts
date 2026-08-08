@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Swarnim Mandal - Portfolio',
     short_name: 'Swarnim Mandal',
-    description: 'Software Engineering student specializing in AI projects and software solutions',
+    description: 'Software engineer specializing in AI projects and software solutions',
     start_url: '/',
     display: 'standalone',
     background_color: '#0a0a0a',

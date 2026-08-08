@@ -19,7 +19,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Swarnim Mandal — Software Engineer & ML Researcher",
   description:
-    "MSc Software Engineering at University of West London. Full-stack developer and machine learning engineer based in London, UK.",
+    "MSc Software Engineering, University of West London. Full-stack developer and machine learning engineer based in London, UK.",
   keywords:
     "Swarnim Mandal, Software Engineer, Full-Stack Developer, Machine Learning, AI, Data Analysis, Python, React, Django, TensorFlow, London",
   authors: [{ name: "Swarnim Mandal" }],

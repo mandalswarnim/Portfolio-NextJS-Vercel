@@ -7,7 +7,7 @@ import StaggerItem from "@/components/animations/StaggerItem";
 export const metadata: Metadata = {
   title: "About — Swarnim Mandal",
   description:
-    "MSc Software Engineering student at University of West London. Full-stack developer and machine learning engineer based in London.",
+    "MSc Software Engineering graduate of the University of West London. Full-stack developer and machine learning engineer based in London.",
 };
 
 const skills = [
@@ -25,12 +25,13 @@ const skills = [
 
 const timeline = [
   {
-    period: "Feb 2025 — Present",
+    period: "Feb 2025 — Jul 2026",
     role: "MSc Software Engineering",
     org: "University of West London",
     location: "London, England",
     type: "education",
     points: [
+      "Completed with Distinction.",
       "Advanced software development practices and cutting-edge engineering methods.",
       "Coursework spanning distributed systems, AI, and modern software architecture.",
     ],
@@ -119,8 +120,8 @@ export default function About() {
                 </h1>
                 <p className="text-lg text-muted leading-relaxed max-w-lg">
                   Software engineer with a background spanning full-stack
-                  development, machine learning, and data analysis. Currently
-                  pursuing an MSc at the University of West London.
+                  development, machine learning, and data analysis. Recently
+                  completed an MSc at the University of West London.
                 </p>
               </FadeIn>
             </div>
@@ -129,7 +130,7 @@ export default function About() {
               <div className="bg-surface rounded-2xl p-8 border border-divider space-y-5">
                 {[
                   { label: "Location", value: "London, United Kingdom" },
-                  { label: "Education", value: "MSc Software Engineering, UWL" },
+                  { label: "Education", value: "MSc Software Engineering, UWL — Distinction" },
                   { label: "Email", value: "mswarnim1@gmail.com", href: "mailto:mswarnim1@gmail.com" },
                   { label: "GitHub", value: "mandalswarnim", href: "https://github.com/mandalswarnim" },
                   { label: "LinkedIn", value: "swarnim-mandal", href: "https://www.linkedin.com/in/swarnim-mandal-678976259/" },
