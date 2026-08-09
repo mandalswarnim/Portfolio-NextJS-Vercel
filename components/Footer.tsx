@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SMMonogram from "@/components/SMMonogram";
+import AthenaMark from "@/components/AthenaMark";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
           <div className="col-span-2 md:col-span-1">
             <div className="mb-4">
-              <SMMonogram size={32} />
+              <AthenaMark height={44} />
             </div>
             <p className="text-sm text-muted leading-relaxed max-w-[200px]">
               Software engineer and ML researcher based in London.

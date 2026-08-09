@@ -31,7 +31,7 @@ No test suite is configured.
 
 **Animation components** in `components/animations/` (`FadeIn`, `StaggerContainer`, `StaggerItem`) are thin framer-motion wrappers used across all pages. All are `"use client"` components and can be imported into server component pages.
 
-**SM Monogram** (`components/SMMonogram.tsx`) — animated SVG logo used in Header and Footer. Steel-blue arc (`#2D5FA3`) animates on mount via `strokeDashoffset`.
+**Athena mark** (`components/AthenaMark.tsx`) — logo used in Header and Footer. Renders `public/athena.png` (portrait art, 402x572) via `next/image`; `height` drives the size and width follows the intrinsic aspect ratio. Icon assets are derived from the same head crop: `app/icon.png` (favicon) and `app/apple-icon.png` are picked up by Next.js file conventions, and `public/icon-192.png` / `public/icon-512.png` back `app/manifest.ts`. Regenerate all five together if the source art changes.
 
 **UAV dashboard (`/uav`)** — light-theme port of a standalone thesis project (ARES PdM). Five routes (`/uav`, `/uav/armory`, `/uav/mission`, `/uav/diagnostics`, `/uav/lab`) sharing `app/uav/layout.tsx` (mounts `AppBootstrap` + `UavNav` tab row). Components in `components/uav/`, state/fetchers in `lib/uav/` (Zustand store reads baked JSON from `public/uav/data/`). Three.js components are loaded with `dynamic(..., { ssr: false })` from `'use client'` pages, confining their bundle weight to `/uav` routes. Client-side procedural simulation only — there is intentionally no inference backend. `lib/uav/palette.ts` mirrors the Tailwind status colors for canvas/Three.js/chart code; keep the two in sync.
 
@@ -61,4 +61,3 @@ Fonts loaded via `next/font/google` in `app/layout.tsx`:
 - **Contact form is fake** — simulates submission with a timeout. Planned: wire up Resend API (`app/api/contact/route.ts`) to deliver to `mswarnim1@gmail.com`.
 - **Project GitHub links** in `app/page.tsx` and `app/services/page.tsx` point to the profile root (`github.com/mandalswarnim`) — update with specific repo URLs.
 - **Hero photo** served from `public/swarnim.jpg` as a plain `<img>` with `grayscale` CSS filter — no `next/image` optimisation applied yet.
-- **Missing icons** — `app/manifest.ts` references `icon-192.png`/`favicon` assets that don't exist in `public/`, causing site-wide 404s for them.

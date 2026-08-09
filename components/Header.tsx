@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import SMMonogram from "@/components/SMMonogram";
+import AthenaMark from "@/components/AthenaMark";
 
 const navItems = [
   { name: "About", href: "/about" },
@@ -30,7 +30,7 @@ export default function Header() {
     >
       <nav className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" aria-label="Home">
-          <SMMonogram size={38} />
+          <AthenaMark height={48} />
         </Link>
 
         {/* Desktop nav */}
