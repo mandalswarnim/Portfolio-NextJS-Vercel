@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { BLOG_ENABLED, getPostBySlug, getAllPosts } from "@/lib/blog";
+import { BLOG_ENABLED, getPostBySlug, getAllPosts, renderMarkdown } from "@/lib/blog";
 import FadeIn from "@/components/animations/FadeIn";
 
 export async function generateStaticParams() {
@@ -80,10 +80,8 @@ export default async function BlogPost({
           {/* Content */}
           <FadeIn delay={0.15}>
             <div
-              className="text-foreground text-base leading-[1.9] space-y-6"
-              dangerouslySetInnerHTML={{
-                __html: post.content.replace(/\n/g, "<br />"),
-              }}
+              className="prose prose-stone max-w-none"
+              dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }}
             />
           </FadeIn>
         </div>

@@ -46,3 +46,7 @@ next-env.d.ts
 
 # local claude settings
 .claude/
+
+# obsidian vault config (content/blog is edited as a vault; config is per-machine)
+.obsidian/
+content/blog/.obsidian/

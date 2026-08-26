@@ -27,7 +27,11 @@ No test suite is configured.
 
 **Pages:** `app/page.tsx` (home), `app/about/`, `app/services/`, `app/contact/`, `app/blog/`, `app/blog/[slug]/`, `app/uav/` (UAV predictive-maintenance dashboard, see below), `app/ai-receptionist/` (sales landing page for the AI Receptionist product — content ported from the gitignored `Reception App/` Twilio+OpenAI app; interactive call demo in `components/aireception/CallDemo.tsx`)
 
-**Blog data** lives entirely in `lib/blog.ts` as a hardcoded array of `BlogPost` objects — no CMS or database. To add a post, append to `blogPosts`. The slug drives the URL.
+**Blog content** lives as markdown files in `content/blog/` — no CMS or database. The filename is the slug and drives the URL; YAML frontmatter carries `title`, `date`, `excerpt` and `category`, while `readTime` is derived from word count. `lib/blog.ts` reads and caches them at build time via `gray-matter`, and `renderMarkdown()` converts a body to HTML with `remark` + `remark-gfm`. To add a post, drop a new `.md` file in `content/blog/`.
+
+The directory is designed to be opened as an Obsidian vault: `convertWikilinks()` in `lib/blog.ts` rewrites `[[slug]]`, `[[slug|Label]]` and `![[image.png]]` into ordinary markdown links before parsing (fenced code blocks are skipped). Embedded images resolve to `public/blog/`. Vault config under `.obsidian/` is gitignored.
+
+Rendered markdown is styled with `@tailwindcss/typography` (`prose prose-stone`); the `typography` block in `tailwind.config.js` maps prose variables onto the design tokens below. Because `lib/blog.ts` uses `fs`, it must only be imported from server components.
 
 **Animation components** in `components/animations/` (`FadeIn`, `StaggerContainer`, `StaggerItem`) are thin framer-motion wrappers used across all pages. All are `"use client"` components and can be imported into server component pages.
 

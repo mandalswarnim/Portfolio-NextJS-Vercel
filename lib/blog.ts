@@ -1,7 +1,22 @@
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { remark } from "remark";
+import remarkGfm from "remark-gfm";
+import remarkHtml from "remark-html";
+
 // Blog is hidden site-wide until real essays are ready — flip to true to
 // restore /blog routes and sitemap entries, then re-add the "Blog" links in
 // components/Header.tsx and components/Footer.tsx.
 export const BLOG_ENABLED = false;
+
+// Posts live as markdown files in content/blog/. The filename is the slug.
+// Frontmatter carries title, date, excerpt and category; readTime is derived
+// from the body. Server-side only — this module touches the filesystem, so it
+// must never be imported into a "use client" component.
+const POSTS_DIR = path.join(process.cwd(), "content", "blog");
+
+const WORDS_PER_MINUTE = 200;
 
 export interface BlogPost {
   slug: string;
@@ -13,124 +28,90 @@ export interface BlogPost {
   readTime: string;
 }
 
-export const blogPosts: BlogPost[] = [
-  {
-    slug: "getting-started-with-nextjs",
-    title: "Getting Started with Next.js 15",
-    date: "2024-10-15",
-    excerpt: "Learn how to build modern web applications with Next.js 15 and the App Router.",
-    content: `
-# Getting Started with Next.js 15
+/**
+ * Rewrite Obsidian-flavoured links into plain markdown so notes authored in a
+ * vault render correctly on the site:
+ *   [[some-post]]          -> [some-post](/blog/some-post)
+ *   [[some-post|Label]]    -> [Label](/blog/some-post)
+ *   ![[diagram.png]]       -> ![](/blog/diagram.png)   (served from public/blog/)
+ * Fenced code blocks are left untouched.
+ */
+function convertWikilinks(markdown: string): string {
+  return markdown
+    .split(/(```[\s\S]*?```)/g)
+    .map((chunk, i) => {
+      if (i % 2 === 1) return chunk; // odd chunks are fenced code
+      return chunk
+        .replace(/!\[\[([^\]|]+?)\]\]/g, (_, target) => `![](/blog/${target.trim()})`)
+        .replace(/\[\[([^\]|]+?)(?:\|([^\]]+?))?\]\]/g, (_, target, label) => {
+          const slug = target.trim();
+          return `[${(label ?? slug).trim()}](/blog/${slug})`;
+        });
+    })
+    .join("");
+}
 
-Next.js 15 introduces powerful new features that make building web applications easier than ever.
+function estimateReadTime(markdown: string): string {
+  const words = markdown.trim().split(/\s+/).filter(Boolean).length;
+  return `${Math.max(1, Math.ceil(words / WORDS_PER_MINUTE))} min read`;
+}
 
-## What's New in Next.js 15
+function readPost(filename: string): BlogPost {
+  const raw = fs.readFileSync(path.join(POSTS_DIR, filename), "utf8");
+  const { data, content } = matter(raw);
+  const slug = filename.replace(/\.md$/, "");
 
-- Improved App Router
-- Better server components
-- Enhanced performance optimizations
+  // Dates written unquoted in YAML come back as Date objects; normalise to
+  // the ISO day string the templates and sitemap expect.
+  const date =
+    data.date instanceof Date
+      ? data.date.toISOString().slice(0, 10)
+      : String(data.date ?? "");
 
-## Getting Started
+  return {
+    slug,
+    title: String(data.title ?? slug),
+    date,
+    excerpt: String(data.excerpt ?? ""),
+    content,
+    category: String(data.category ?? "Uncategorised"),
+    readTime: estimateReadTime(content),
+  };
+}
 
-To create a new Next.js project, run:
+let cache: BlogPost[] | null = null;
 
-\`\`\`bash
-npx create-next-app@latest my-app
-\`\`\`
-
-This will set up a new project with all the latest features and best practices.
-
-## Conclusion
-
-Next.js 15 is a game-changer for web development, offering improved performance and developer experience.
-    `,
-    category: "Web Development",
-    readTime: "5 min read",
-  },
-  {
-    slug: "introduction-to-machine-learning",
-    title: "Introduction to Machine Learning",
-    date: "2024-10-10",
-    excerpt: "A beginner-friendly introduction to machine learning concepts and applications.",
-    content: `
-# Introduction to Machine Learning
-
-Machine learning is transforming how we build intelligent applications.
-
-## What is Machine Learning?
-
-Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed.
-
-## Types of Machine Learning
-
-1. **Supervised Learning**: Learning from labeled data
-2. **Unsupervised Learning**: Finding patterns in unlabeled data
-3. **Reinforcement Learning**: Learning through trial and error
-
-## Getting Started
-
-Start with Python and popular libraries like:
-- TensorFlow
-- PyTorch
-- Scikit-learn
-
-## Conclusion
-
-Machine learning opens up endless possibilities for creating intelligent applications.
-    `,
-    category: "AI/ML",
-    readTime: "7 min read",
-  },
-  {
-    slug: "building-scalable-apis",
-    title: "Building Scalable RESTful APIs",
-    date: "2024-10-05",
-    excerpt: "Best practices for designing and building scalable RESTful APIs.",
-    content: `
-# Building Scalable RESTful APIs
-
-Learn how to design and build APIs that can handle growth.
-
-## Key Principles
-
-- Use proper HTTP methods
-- Implement versioning
-- Add rate limiting
-- Document thoroughly
-
-## Tools and Technologies
-
-- Node.js with Express
-- PostgreSQL for data persistence
-- Redis for caching
-- Docker for containerization
-
-## Security Considerations
-
-Always implement:
-- Authentication and authorization
-- Input validation
-- HTTPS encryption
-- Rate limiting
-
-## Conclusion
-
-Following these best practices will help you build robust, scalable APIs.
-    `,
-    category: "Backend",
-    readTime: "6 min read",
-  },
-];
+function loadPosts(): BlogPost[] {
+  if (cache) return cache;
+  if (!fs.existsSync(POSTS_DIR)) {
+    cache = [];
+    return cache;
+  }
+  cache = fs
+    .readdirSync(POSTS_DIR)
+    .filter((f) => f.endsWith(".md"))
+    .map(readPost)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return cache;
+}
 
 export function getAllPosts(): BlogPost[] {
-  return blogPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return loadPosts();
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
-  return blogPosts.find((post) => post.slug === slug);
+  return loadPosts().find((post) => post.slug === slug);
 }
 
 export function getCategories(): string[] {
-  const categories = blogPosts.map((post) => post.category);
-  return Array.from(new Set(categories));
+  return Array.from(new Set(loadPosts().map((post) => post.category)));
+}
+
+/** Markdown body -> HTML string, ready for dangerouslySetInnerHTML. */
+export function renderMarkdown(markdown: string): string {
+  return remark()
+    .use(remarkGfm)
+    .use(remarkHtml, { sanitize: false })
+    .processSync(convertWikilinks(markdown))
+    .toString();
 }
