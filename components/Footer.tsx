@@ -1,12 +1,13 @@
 import Link from "next/link";
 import AthenaMark from "@/components/AthenaMark";
+import FadeIn from "@/components/animations/FadeIn";
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="border-t border-divider bg-background">
-      <div className="max-w-6xl mx-auto px-6 py-14">
+      <FadeIn className="max-w-6xl mx-auto px-6 py-14">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
           <div className="col-span-2 md:col-span-1">
             <div className="mb-4">
@@ -92,7 +93,7 @@ export default function Footer() {
           <p className="text-sm text-subtle">© {year} Swarnim Mandal. All rights reserved.</p>
           <p className="text-sm text-subtle">London, United Kingdom</p>
         </div>
-      </div>
+      </FadeIn>
     </footer>
   );
 }

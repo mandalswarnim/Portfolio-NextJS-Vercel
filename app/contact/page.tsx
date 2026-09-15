@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import FadeIn from "@/components/animations/FadeIn";
+import TextReveal from "@/components/animations/TextReveal";
 
 const contactLinks = [
   {
@@ -62,9 +63,10 @@ export default function Contact() {
             <p className="text-sm font-medium text-primary uppercase tracking-widest mb-6">
               Contact
             </p>
-            <h1 className="font-serif text-5xl md:text-6xl font-bold text-foreground leading-[1.1] mb-6">
-              Let&apos;s work<br />together
-            </h1>
+            <TextReveal
+              lines={["Let’s work", "together"]}
+              className="font-serif text-5xl md:text-6xl font-bold text-foreground leading-[1.1] mb-6"
+            />
             <p className="text-lg text-muted max-w-xl leading-relaxed">
               Open to full-time roles, freelance projects, and research collaborations.
               I typically respond within 24 hours.

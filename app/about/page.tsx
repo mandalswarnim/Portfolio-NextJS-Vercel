@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
+import TextReveal from "@/components/animations/TextReveal";
 import StaggerContainer from "@/components/animations/StaggerContainer";
 import StaggerItem from "@/components/animations/StaggerItem";
 
@@ -115,9 +116,10 @@ export default function About() {
                 <p className="text-sm font-medium text-primary uppercase tracking-widest mb-6">
                   About
                 </p>
-                <h1 className="font-serif text-5xl md:text-6xl font-bold text-foreground leading-[1.1] mb-6">
-                  Swarnim<br />Mandal
-                </h1>
+                <TextReveal
+                  lines={["Swarnim", "Mandal"]}
+                  className="font-serif text-5xl md:text-6xl font-bold text-foreground leading-[1.1] mb-6"
+                />
                 <p className="text-lg text-muted leading-relaxed max-w-lg">
                   Software engineer with a background spanning full-stack
                   development, machine learning, and data analysis. Recently

@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AthenaMark from "@/components/AthenaMark";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const navItems = [
   { name: "About", href: "/about" },
@@ -14,6 +16,7 @@ const navItems = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -26,30 +29,49 @@ export default function Header() {
       initial={{ y: -56, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="fixed top-0 w-full z-50 bg-white border-b border-divider"
+      className={`fixed top-0 w-full z-50 border-b border-divider bg-white/90 backdrop-blur-md transition-shadow duration-300 ${
+        scrolled ? "shadow-[0_1px_12px_rgba(28,22,18,0.06)]" : "shadow-none"
+      }`}
     >
+      <ScrollProgress />
       <nav className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-        <Link href="/" aria-label="Home">
+        <Link
+          href="/"
+          aria-label="Home"
+          className="transition-transform duration-300 ease-out hover:scale-[1.04] active:scale-95"
+        >
           <AthenaMark height={48} />
         </Link>
 
         {/* Desktop nav */}
         <ul className="hidden md:flex items-center gap-10">
-          {navItems.map((item) => (
-            <li key={item.name}>
-              <Link
-                href={item.href}
-                className="text-sm text-muted hover:text-foreground transition-colors tracking-wide"
-              >
-                {item.name}
-              </Link>
-            </li>
-          ))}
+          {navItems.map((item) => {
+            const active = pathname === item.href || pathname.startsWith(item.href + "/");
+            return (
+              <li key={item.name} className="relative">
+                <Link
+                  href={item.href}
+                  className={`relative block py-1 text-sm tracking-wide transition-colors after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-foreground after:transition-transform after:duration-300 after:ease-out hover:after:scale-x-100 ${
+                    active ? "text-foreground" : "text-muted hover:text-foreground"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+                {active && (
+                  <motion.span
+                    layoutId="nav-active"
+                    className="absolute -bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-primary"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </li>
+            );
+          })}
         </ul>
 
         <Link
           href="/contact"
-          className="hidden md:inline-flex items-center bg-foreground text-background text-sm font-medium px-5 py-2.5 rounded-full hover:bg-foreground/80 transition-colors"
+          className="hidden md:inline-flex items-center bg-foreground text-background text-sm font-medium px-5 py-2.5 rounded-full transition-all duration-300 hover:bg-foreground/85 hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(28,22,18,0.18)] active:translate-y-0 active:shadow-none"
         >
           Hire me
         </Link>
@@ -81,8 +103,13 @@ export default function Header() {
             className="md:hidden bg-background/98 backdrop-blur-md border-b border-divider px-6 pb-6"
           >
             <ul className="space-y-4 pt-2">
-              {navItems.map((item) => (
-                <li key={item.name}>
+              {navItems.map((item, i) => (
+                <motion.li
+                  key={item.name}
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.05 + i * 0.05, duration: 0.25 }}
+                >
                   <Link
                     href={item.href}
                     className="block text-foreground text-base"
@@ -90,9 +117,13 @@ export default function Header() {
                   >
                     {item.name}
                   </Link>
-                </li>
+                </motion.li>
               ))}
-              <li>
+              <motion.li
+                initial={{ opacity: 0, x: -8 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.05 + navItems.length * 0.05, duration: 0.25 }}
+              >
                 <Link
                   href="/contact"
                   className="inline-flex bg-foreground text-background text-sm font-medium px-5 py-2.5 rounded-full"
@@ -100,7 +131,7 @@ export default function Header() {
                 >
                   Hire me
                 </Link>
-              </li>
+              </motion.li>
             </ul>
           </motion.div>
         )}

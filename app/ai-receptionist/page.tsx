@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
+import TextReveal from "@/components/animations/TextReveal";
 import StaggerContainer from "@/components/animations/StaggerContainer";
 import StaggerItem from "@/components/animations/StaggerItem";
 import CallDemo from "@/components/aireception/CallDemo";
@@ -188,13 +189,14 @@ export default function AiReceptionistPage() {
               </span>
             </FadeIn>
 
-            <FadeIn delay={0.1}>
-              <h1 className="font-serif text-5xl md:text-6xl xl:text-7xl font-bold text-foreground leading-[1.08] mb-6">
-                Never miss a call.
-                <br />
-                <span className="text-primary">Never lose a booking.</span>
-              </h1>
-            </FadeIn>
+            <TextReveal
+              delay={0.1}
+              lines={[
+                "Never miss a call.",
+                <span key="b" className="text-primary">Never lose a booking.</span>,
+              ]}
+              className="font-serif text-5xl md:text-6xl xl:text-7xl font-bold text-foreground leading-[1.08] mb-6"
+            />
 
             <FadeIn delay={0.2}>
               <p className="text-lg text-muted leading-relaxed mb-10 max-w-2xl mx-auto">

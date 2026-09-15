@@ -3,6 +3,7 @@ import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import MotionProvider from "@/components/animations/MotionProvider";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -40,11 +41,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${playfair.variable} ${inter.variable}`}
+    >
       <body className="antialiased bg-background text-foreground font-sans">
-        <Header />
-        <main className="pt-20">{children}</main>
-        <Footer />
+        <MotionProvider>
+          <Header />
+          <main className="pt-20">{children}</main>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

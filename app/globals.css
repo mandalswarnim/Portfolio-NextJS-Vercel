@@ -4,6 +4,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Non-static so framer-motion useScroll can measure element offsets. */
+  position: relative;
 }
 
 body {

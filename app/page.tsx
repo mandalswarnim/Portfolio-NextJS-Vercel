@@ -4,6 +4,8 @@ import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
 import StaggerContainer from "@/components/animations/StaggerContainer";
 import StaggerItem from "@/components/animations/StaggerItem";
+import TextReveal from "@/components/animations/TextReveal";
+import HeroPortrait from "@/components/HeroPortrait";
 
 const expertise = [
   {
@@ -105,11 +107,11 @@ export default function Home() {
                 </p>
               </FadeIn>
 
-              <FadeIn delay={0.1}>
-                <h1 className="font-serif text-5xl md:text-6xl xl:text-7xl font-bold text-foreground leading-[1.08] mb-7">
-                  Building software<br />that thinks ahead.
-                </h1>
-              </FadeIn>
+              <TextReveal
+                delay={0.1}
+                lines={["Building software", "that thinks ahead."]}
+                className="font-serif text-5xl md:text-6xl xl:text-7xl font-bold text-foreground leading-[1.08] mb-7"
+              />
 
               <FadeIn delay={0.2}>
                 <p className="text-lg text-muted leading-relaxed mb-10 max-w-[480px]">
@@ -123,13 +125,14 @@ export default function Home() {
                 <div className="flex flex-wrap gap-4">
                   <Link
                     href="/services"
-                    className="inline-flex items-center bg-foreground text-background text-sm font-medium px-6 py-3 rounded-full hover:bg-foreground/80 transition-colors"
+                    className="group inline-flex items-center gap-2 bg-foreground text-background text-sm font-medium px-6 py-3 rounded-full transition-all duration-300 hover:bg-foreground/85 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(28,22,18,0.18)] active:translate-y-0 active:shadow-none"
                   >
                     View my work
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                   </Link>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center border border-divider text-foreground text-sm font-medium px-6 py-3 rounded-full hover:border-foreground/40 transition-colors"
+                    className="inline-flex items-center border border-divider text-foreground text-sm font-medium px-6 py-3 rounded-full transition-all duration-300 hover:border-foreground/40 hover:bg-surface hover:-translate-y-0.5 active:translate-y-0"
                   >
                     Get in touch
                   </Link>
@@ -139,20 +142,7 @@ export default function Home() {
 
             {/* Right: photo */}
             <FadeIn delay={0.2} direction="left">
-              <div className="relative max-w-sm mx-auto lg:ml-auto">
-                <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-surface border border-divider">
-                  <img
-                    src="/swarnim.jpg"
-                    alt="Swarnim Mandal"
-                    className="w-full h-full object-cover grayscale"
-                  />
-                </div>
-                {/* Floating badge */}
-                <div className="absolute -bottom-4 -left-4 bg-background border border-divider rounded-xl px-4 py-3 shadow-sm">
-                  <p className="text-xs text-subtle">Based in</p>
-                  <p className="text-sm font-medium text-foreground">London, United Kingdom</p>
-                </div>
-              </div>
+              <HeroPortrait />
             </FadeIn>
           </div>
         </div>
@@ -170,9 +160,9 @@ export default function Home() {
           <StaggerContainer className="divide-y divide-divider border-t border-divider">
             {expertise.map((item) => (
               <StaggerItem key={item.num}>
-                <div className="grid md:grid-cols-[64px_1fr_2fr] items-start gap-6 py-8 hover:bg-surface/60 transition-colors px-2 -mx-2 rounded-lg">
-                  <span className="text-xs font-mono text-subtle pt-0.5">{item.num}</span>
-                  <h3 className="font-medium text-foreground">{item.title}</h3>
+                <div className="group grid md:grid-cols-[64px_1fr_2fr] items-start gap-6 py-8 hover:bg-surface/60 transition-colors duration-300 px-2 -mx-2 rounded-lg">
+                  <span className="text-xs font-mono text-subtle pt-0.5 transition-colors duration-300 group-hover:text-primary">{item.num}</span>
+                  <h3 className="font-medium text-foreground transition-transform duration-300 ease-out group-hover:translate-x-1">{item.title}</h3>
                   <p className="text-sm text-muted leading-relaxed">{item.desc}</p>
                 </div>
               </StaggerItem>
@@ -192,9 +182,10 @@ export default function Home() {
               </h2>
               <Link
                 href="/services"
-                className="text-sm text-primary hover:underline underline-offset-4"
+                className="group inline-flex items-center gap-1 text-sm text-primary hover:underline underline-offset-4"
               >
-                All projects →
+                All projects
+                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Link>
             </div>
           </FadeIn>
@@ -202,7 +193,7 @@ export default function Home() {
           <StaggerContainer className="grid md:grid-cols-3 gap-6">
             {projects.map((project) => (
               <StaggerItem key={project.title}>
-                <div className="flex flex-col bg-surface rounded-2xl p-6 border border-divider hover:border-foreground/20 hover:shadow-md transition-all h-full">
+                <div className="flex flex-col bg-surface rounded-2xl p-6 border border-divider transition-all duration-300 ease-out hover:border-foreground/20 hover:shadow-[0_14px_32px_-12px_rgba(28,22,18,0.18)] hover:-translate-y-1 h-full">
                   <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-3">
                     {project.category}
                   </span>
@@ -229,25 +220,28 @@ export default function Home() {
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center bg-foreground text-background text-sm font-medium px-4 py-2 rounded-full hover:bg-foreground/80 transition-colors"
+                          className="group/btn inline-flex items-center gap-1.5 bg-foreground text-background text-sm font-medium px-4 py-2 rounded-full hover:bg-foreground/85 transition-colors"
                         >
-                          Try me →
+                          Try me
+                          <span className="transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
                         </a>
                       ) : (
                         <Link
                           href={project.demo}
-                          className="inline-flex items-center bg-foreground text-background text-sm font-medium px-4 py-2 rounded-full hover:bg-foreground/80 transition-colors"
+                          className="group/btn inline-flex items-center gap-1.5 bg-foreground text-background text-sm font-medium px-4 py-2 rounded-full hover:bg-foreground/85 transition-colors"
                         >
-                          Try me →
+                          Try me
+                          <span className="transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
                         </Link>
                       ))}
                     <a
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                      className="group/gh inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
                     >
-                      View on GitHub <span className="text-xs">↗</span>
+                      View on GitHub{" "}
+                      <span className="text-xs transition-transform duration-300 group-hover/gh:-translate-y-0.5 group-hover/gh:translate-x-0.5">↗</span>
                     </a>
                   </div>
                 </div>
@@ -300,7 +294,7 @@ export default function Home() {
               <div className="flex flex-wrap gap-4">
                 <a
                   href="mailto:mswarnim1@gmail.com"
-                  className="inline-flex items-center bg-foreground text-background text-sm font-medium px-6 py-3 rounded-full hover:bg-foreground/80 transition-colors"
+                  className="inline-flex items-center bg-foreground text-background text-sm font-medium px-6 py-3 rounded-full transition-all duration-300 hover:bg-foreground/85 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(28,22,18,0.18)] active:translate-y-0 active:shadow-none"
                 >
                   mswarnim1@gmail.com
                 </a>

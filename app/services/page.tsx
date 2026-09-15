@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
+import TextReveal from "@/components/animations/TextReveal";
 import StaggerContainer from "@/components/animations/StaggerContainer";
 import StaggerItem from "@/components/animations/StaggerItem";
 
@@ -111,9 +112,10 @@ export default function Services() {
             <p className="text-sm font-medium text-primary uppercase tracking-widest mb-6">
               Work
             </p>
-            <h1 className="font-serif text-5xl md:text-6xl font-bold text-foreground leading-[1.1] mb-6">
-              What I build
-            </h1>
+            <TextReveal
+              lines={["What I build"]}
+              className="font-serif text-5xl md:text-6xl font-bold text-foreground leading-[1.1] mb-6"
+            />
             <p className="text-lg text-muted max-w-2xl leading-relaxed">
               A selection of projects and the services I offer. From production web apps to
               research-grade machine learning models.
