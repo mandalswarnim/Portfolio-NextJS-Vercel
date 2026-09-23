@@ -6,6 +6,8 @@ import TextReveal from "@/components/animations/TextReveal";
 import StaggerContainer from "@/components/animations/StaggerContainer";
 import StaggerItem from "@/components/animations/StaggerItem";
 import CallDemo from "@/components/aireception/CallDemo";
+import EnquiryForm from "@/components/aireception/EnquiryForm";
+import { CONTACT_EMAIL, RECEPTIONIST_PRICING, SAMPLE_CALL_AUDIO } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "AI Receptionist — 24/7 Call Answering & Booking Capture",
@@ -20,28 +22,28 @@ export const metadata: Metadata = {
   },
 };
 
-const CONTACT_HREF = "/contact";
+const ENQUIRY_HREF = "#enquire";
 const EMAIL_HREF =
-  "mailto:mswarnim1@gmail.com?subject=AI%20Receptionist%20enquiry&body=Hi%20Swarnim%2C%20I%27d%20like%20to%20add%20the%20AI%20Receptionist%20to%20my%20business.";
+  `mailto:${CONTACT_EMAIL}?subject=AI%20Receptionist%20enquiry&body=Hi%20Swarnim%2C%20I%27d%20like%20to%20add%20the%20AI%20Receptionist%20to%20my%20business.`;
 
 const problems = [
   {
-    stat: "62%",
-    title: "Missed Calls",
+    stat: "After hours",
+    title: "Calls land when you're closed",
     description:
-      "of small-business calls go unanswered. Every missed call is a missed opportunity that walks straight to your competitor.",
+      "Evenings, weekends and lunch breaks are when many customers finally get round to calling — and reach voicemail.",
   },
   {
-    stat: "£60K",
-    title: "Lost Revenue",
+    stat: "Busy hands",
+    title: "You can't always pick up",
     description:
-      "average annual revenue lost per business from missed calls — money you've already spent marketing to attract, gone.",
+      "With a patient in the chair or a job on site, the phone rings out. Most callers won't leave a message.",
   },
   {
-    stat: "4 hrs",
-    title: "Slow Response",
+    stat: "Next in line",
+    title: "They call someone else",
     description:
-      "average callback time for a missed call. By then, most customers have already booked with someone else.",
+      "A caller who doesn't get through usually tries the next business on the list rather than waiting for a callback.",
   },
 ];
 
@@ -49,13 +51,13 @@ const solutions = [
   {
     title: "Answers instantly",
     description:
-      "Picks up every call in under a second. No hold music, no voicemail, no missed opportunities — day or night.",
+      "When you can't pick up, your line forwards to the AI, which answers straight away — no voicemail, day or night.",
     icon: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z",
   },
   {
     title: "Captures every detail",
     description:
-      "Name, phone number, reason for calling, preferred time — all captured through natural conversation, not robotic prompts.",
+      "Name, company, phone, email, what they need and how urgent it is — captured through natural conversation, then read back to confirm.",
     icon: "M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z",
   },
   {
@@ -77,13 +79,13 @@ const steps = [
     step: "02",
     title: "AI handles it",
     description:
-      "The AI has a natural conversation — understands their needs, answers questions, and captures name, number, and booking details.",
+      "The AI introduces itself as a virtual assistant, has a natural conversation, and captures the caller's details and what they need.",
   },
   {
     step: "03",
     title: "You get the booking",
     description:
-      "Within seconds, a beautifully formatted email lands in your inbox with all the details. Ready to confirm and schedule.",
+      "When the call ends, a structured summary with the full transcript lands in your inbox, ready for you to call back.",
   },
 ];
 
@@ -103,47 +105,99 @@ const features = [
   {
     title: "Instant email alerts",
     description:
-      "Structured booking details in your inbox the moment a call ends — name, number, time preference, all organised.",
+      "A structured summary in your inbox the moment a call ends — caller details, their message and an urgency level.",
     icon: "M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0",
   },
   {
     title: "Easy integration",
     description:
-      "Connect your existing phone number in minutes. No new hardware, no complex setup — just forward your calls.",
+      "Keep your existing number. Set it to forward unanswered calls and the AI picks up — no new hardware.",
     icon: "M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244",
   },
   {
-    title: "Call analytics",
+    title: "Call history & transcripts",
     description:
-      "Track call volume, booking rates, peak hours, and more. Understand your customers with real data.",
+      "Every call is logged with its transcript and extracted details, so nothing depends on memory or scribbled notes.",
     icon: "M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z",
   },
   {
-    title: "Multi-language",
+    title: "Urgency flagging",
     description:
-      "Serve customers in their preferred language. The AI understands and speaks multiple languages fluently.",
+      "Each call is rated from low to urgent, so the callbacks that matter most rise to the top of your inbox.",
     icon: "M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495A18.023 18.023 0 0112 15.75",
   },
 ];
 
-const testimonials = [
+const pricingItems = [
   {
-    quote:
-      "We were losing 30+ calls a week. Within a month of running the AI receptionist, our bookings went up 40%. It pays for itself.",
-    name: "Dr. Rachel Kim",
-    role: "Owner, Bright Smile Dentistry",
+    label: "Setup",
+    note: "one-off",
+    from: RECEPTIONIST_PRICING.setupFrom,
+    unit: "",
+    includes: [
+      "Phone number and call forwarding configured",
+      "Greeting and questions tailored to your business",
+      "Summary emails sent to your inbox",
+      "Test calls together before go-live",
+    ],
   },
   {
-    quote:
-      "My clients think they're talking to a real person. The call quality and the booking emails are incredibly professional.",
-    name: "James Porter",
-    role: "Founder, Porter & Co Law",
+    label: "Running",
+    note: "monthly",
+    from: RECEPTIONIST_PRICING.monthlyFrom,
+    unit: "/mo",
+    includes: [
+      "Hosting, monitoring and updates",
+      "Changes to your script when your business changes",
+      "Direct support from me — no ticket queue",
+      "Cancel any time; your call records are exported to you",
+    ],
+  },
+];
+
+const dataPoints = [
+  {
+    title: "Callers know it's an AI",
+    description:
+      "The receptionist introduces itself as a virtual assistant at the start of every call.",
   },
   {
-    quote:
-      "I run a solo practice and can't always answer the phone. This makes sure I never miss a potential client. Game changer.",
-    name: "Maria Santos",
-    role: "Therapist, Mindful Wellness",
+    title: "Only what you need",
+    description:
+      "It collects the details needed to call someone back: name, company, phone, email, message and urgency.",
+  },
+  {
+    title: "Recording is optional",
+    description:
+      "Transcripts are built from the conversation itself. Audio recording is off unless you choose to enable it.",
+  },
+  {
+    title: "Deleted on request",
+    description:
+      "Call records can be deleted individually, and everything is exported to you and removed if you leave.",
+  },
+];
+
+const faqs = [
+  {
+    q: "Do I need a new phone number?",
+    a: "No. You keep your existing number and set it to forward calls you don't answer. Customers dial you exactly as they do now.",
+  },
+  {
+    q: "Does it book appointments into my calendar?",
+    a: "Not directly. It takes the caller's details and what they need, then emails you a structured summary so you can confirm the booking yourself.",
+  },
+  {
+    q: "What does it cost to run?",
+    a: "A one-off setup fee plus a monthly fee. Telephony and AI usage scale with call volume, so you'll get a clear estimate based on your numbers before anything is set up.",
+  },
+  {
+    q: "How long does setup take?",
+    a: "Once we've agreed what the receptionist should say and ask, going live is a matter of configuring forwarding and running test calls together.",
+  },
+  {
+    q: "What happens if the AI can't help?",
+    a: "It never pretends to. It takes a message with the caller's details and urgency so you can follow up personally.",
   },
 ];
 
@@ -211,10 +265,10 @@ export default function AiReceptionistPage() {
             <FadeIn delay={0.3}>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link
-                  href={CONTACT_HREF}
+                  href={ENQUIRY_HREF}
                   className="inline-flex items-center bg-foreground text-background text-sm font-medium px-6 py-3 rounded-full hover:bg-foreground/80 transition-colors"
                 >
-                  Get in touch to integrate it
+                  Get a quote
                 </Link>
                 <BookingButton source="ai-receptionist-hero" label="Book a demo call" />
                 <a
@@ -242,6 +296,9 @@ export default function AiReceptionistPage() {
                       dashboard · ai-receptionist
                     </span>
                   </div>
+                  <span className="text-[10px] uppercase tracking-wider text-subtle">
+                    Illustrative data
+                  </span>
                 </div>
                 <div className="p-6 md:p-8">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
@@ -437,20 +494,27 @@ export default function AiReceptionistPage() {
         </div>
       </section>
 
-      {/* ── Live Demo ────────────────────────────────────── */}
+      {/* ── Example call ─────────────────────────────────── */}
       <section className="py-24 border-b border-divider">
         <div className="max-w-6xl mx-auto px-6">
           <FadeIn>
             <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">
-              Live Preview
+              Example Call
             </p>
             <h2 className="font-serif text-4xl font-bold text-foreground mb-4">
               See it in action
             </h2>
-            <p className="text-muted text-lg max-w-2xl mb-16">
-              Here&apos;s what a real call sounds like — natural, helpful, and
-              professional, every single time.
+            <p className="text-muted text-lg max-w-2xl mb-10">
+              An example conversation and the summary email it produces.
             </p>
+            {SAMPLE_CALL_AUDIO && (
+              <div className="mb-12 max-w-xl rounded-2xl border border-divider bg-surface p-5">
+                <p className="text-sm font-medium text-foreground mb-3">
+                  Listen to a recorded test call
+                </p>
+                <audio controls preload="none" src={SAMPLE_CALL_AUDIO} className="w-full" />
+              </div>
+            )}
           </FadeIn>
           <FadeIn delay={0.1}>
             <CallDemo />
@@ -458,39 +522,28 @@ export default function AiReceptionistPage() {
         </div>
       </section>
 
-      {/* ── Testimonials ─────────────────────────────────── */}
+      {/* ── Your callers' data ───────────────────────────── */}
       <section className="py-24 border-b border-divider bg-surface">
         <div className="max-w-6xl mx-auto px-6">
           <FadeIn>
-            <h2 className="font-serif text-4xl font-bold text-foreground mb-16">
-              Loved by businesses
+            <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">
+              Trust &amp; Data
+            </p>
+            <h2 className="font-serif text-4xl font-bold text-foreground mb-4">
+              Your callers&apos; data, handled properly
             </h2>
+            <p className="text-muted text-lg max-w-2xl mb-16">
+              Calls are handled by Twilio and OpenAI; caller details are stored
+              in a database dedicated to your business.
+            </p>
           </FadeIn>
 
-          <StaggerContainer className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((t) => (
-              <StaggerItem key={t.name}>
-                <div className="h-full rounded-2xl border border-divider bg-background p-8">
-                  <div className="flex gap-1 mb-5">
-                    {[...Array(5)].map((_, j) => (
-                      <svg
-                        key={j}
-                        className="w-4 h-4 text-status-warning fill-current"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                  </div>
-                  <p className="text-foreground leading-relaxed mb-6 italic">
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-                  <div>
-                    <p className="text-sm font-medium text-foreground">
-                      {t.name}
-                    </p>
-                    <p className="text-sm text-muted">{t.role}</p>
-                  </div>
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {dataPoints.map((point) => (
+              <StaggerItem key={point.title}>
+                <div className="h-full rounded-2xl border border-divider bg-background p-7">
+                  <h3 className="font-medium text-foreground mb-2">{point.title}</h3>
+                  <p className="text-sm text-muted leading-relaxed">{point.description}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -498,11 +551,87 @@ export default function AiReceptionistPage() {
         </div>
       </section>
 
-      {/* ── Final CTA ────────────────────────────────────── */}
-      <section className="py-28">
+      {/* ── Pricing ──────────────────────────────────────── */}
+      <section className="py-24 border-b border-divider">
         <div className="max-w-6xl mx-auto px-6">
           <FadeIn>
-            <div className="max-w-2xl">
+            <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">
+              Pricing
+            </p>
+            <h2 className="font-serif text-4xl font-bold text-foreground mb-4">
+              Simple, transparent pricing
+            </h2>
+            <p className="text-muted text-lg max-w-2xl mb-16">
+              A one-off setup and a monthly fee. Call costs depend on your
+              volume, so every quote is based on your numbers.
+            </p>
+          </FadeIn>
+
+          <StaggerContainer className="grid md:grid-cols-2 gap-6 max-w-4xl">
+            {pricingItems.map((item) => (
+              <StaggerItem key={item.label}>
+                <div className="h-full rounded-2xl border border-divider bg-surface p-8">
+                  <p className="text-xs text-subtle uppercase tracking-wider mb-2">
+                    {item.label} · {item.note}
+                  </p>
+                  <p className="font-serif text-3xl font-bold text-foreground mb-6">
+                    {item.from === null ? (
+                      "Quote on request"
+                    ) : (
+                      <>
+                        <span className="text-base font-sans font-normal text-muted">from </span>
+                        £{item.from.toLocaleString("en-GB")}
+                        <span className="text-base font-sans font-normal text-muted">{item.unit}</span>
+                      </>
+                    )}
+                  </p>
+                  <ul className="space-y-3">
+                    {item.includes.map((line) => (
+                      <li key={line} className="flex gap-3 text-sm text-muted leading-relaxed">
+                        <span className="text-primary">✓</span>
+                        {line}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* ── FAQ ──────────────────────────────────────────── */}
+      <section className="py-24 border-b border-divider bg-surface">
+        <div className="max-w-6xl mx-auto px-6">
+          <FadeIn>
+            <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">
+              FAQ
+            </p>
+            <h2 className="font-serif text-4xl font-bold text-foreground mb-12">
+              Common questions
+            </h2>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <div className="max-w-3xl divide-y divide-divider border-t border-b border-divider">
+              {faqs.map((faq) => (
+                <details key={faq.q} className="group py-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-medium text-foreground">
+                    {faq.q}
+                    <span className="text-subtle transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-3 text-sm text-muted leading-relaxed">{faq.a}</p>
+                </details>
+              ))}
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ── Enquiry ──────────────────────────────────────── */}
+      <section id="enquire" className="py-28 scroll-mt-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid lg:grid-cols-[1fr_1.4fr] gap-16">
+            <FadeIn>
               <p className="text-sm font-medium text-primary uppercase tracking-widest mb-4">
                 Built on Twilio · OpenAI · Node.js
               </p>
@@ -513,26 +642,23 @@ export default function AiReceptionistPage() {
               </h2>
               <p className="text-muted text-lg mb-10">
                 I build, deploy, and integrate the AI receptionist into your
-                existing phone line and workflow. Get in touch and let&apos;s set
-                it up for you.
+                existing phone line and workflow. Tell me a little about your
+                business and I&apos;ll come back with a quote.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link
-                  href={CONTACT_HREF}
-                  className="inline-flex items-center bg-foreground text-background text-sm font-medium px-6 py-3 rounded-full hover:bg-foreground/80 transition-colors"
-                >
-                  Get in touch
-                </Link>
                 <BookingButton source="ai-receptionist-footer" label="Book a demo call" />
                 <a
                   href={EMAIL_HREF}
                   className="inline-flex items-center border border-divider text-foreground text-sm font-medium px-6 py-3 rounded-full hover:border-foreground/40 transition-colors"
                 >
-                  mswarnim1@gmail.com
+                  {CONTACT_EMAIL}
                 </a>
               </div>
-            </div>
-          </FadeIn>
+            </FadeIn>
+            <FadeIn delay={0.1}>
+              <EnquiryForm />
+            </FadeIn>
+          </div>
         </div>
       </section>
     </div>

@@ -5,6 +5,7 @@ import { track } from "@vercel/analytics";
 import FadeIn from "@/components/animations/FadeIn";
 import TextReveal from "@/components/animations/TextReveal";
 import { BOOKING_URL, CONTACT_EMAIL } from "@/lib/site";
+import { submitEnquiry } from "@/lib/contact-client";
 
 const contactLinks = [
   {
@@ -49,19 +50,13 @@ export default function Contact() {
     setStatus("sending");
     setError("");
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, startedAt: startedAt.current }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || `Something went wrong — please email ${CONTACT_EMAIL}.`);
+      await submitEnquiry({ ...form, startedAt: startedAt.current });
       setStatus("success");
-      track("contact_submitted");
+      track("contact_submitted", { source: "contact" });
       setForm({ name: "", email: "", subject: "", message: "", website: "" });
     } catch (err) {
       setStatus("error");
-      setError(err instanceof Error ? err.message : `Something went wrong — please email ${CONTACT_EMAIL}.`);
+      setError((err as Error).message);
     }
   };
 

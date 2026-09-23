@@ -13,6 +13,8 @@ import { CONTACT_EMAIL } from "@/lib/site";
 const LIMITS = { name: 100, email: 200, subject: 200, message: 5000 };
 const MIN_FILL_MS = 3000; // bots submit instantly
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAX_DETAILS = 10;
+const MAX_DETAIL_LEN = 200;
 
 type Payload = {
   name: string;
@@ -21,6 +23,7 @@ type Payload = {
   message: string;
   website?: string; // honeypot
   startedAt?: number;
+  details?: Record<string, unknown>; // extra labelled fields, e.g. from the receptionist enquiry form
 };
 
 const escapeHtml = (s: string) =>
@@ -69,6 +72,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
   }
 
+  const details = Object.entries(data.details ?? {})
+    .slice(0, MAX_DETAILS)
+    .map(([k, v]) => [k.slice(0, 50), String(v ?? "").trim().slice(0, MAX_DETAIL_LEN)] as const)
+    .filter(([, v]) => v);
+
   if (!process.env.RESEND_API_KEY) {
     console.error("[contact] RESEND_API_KEY is not set");
     return NextResponse.json(
@@ -88,9 +96,10 @@ export async function POST(req: Request) {
       to: [CONTACT_EMAIL],
       reply_to: fields.email,
       subject: `[swarnimmandal.me] ${fields.subject}`,
-      text: `From: ${fields.name} <${fields.email}>\n\n${fields.message}`,
+      text: `From: ${fields.name} <${fields.email}>\n${details.map(([k, v]) => `${k}: ${v}\n`).join("")}\n${fields.message}`,
       html: `<p><strong>From:</strong> ${safe.name} &lt;${safe.email}&gt;</p>
 <p><strong>Subject:</strong> ${safe.subject}</p>
+${details.map(([k, v]) => `<p><strong>${escapeHtml(k)}:</strong> ${escapeHtml(v)}</p>`).join("\n")}
 <hr />
 <p style="white-space:pre-wrap">${safe.message}</p>`,
     });

@@ -6,7 +6,7 @@ import { useRef, useState, useEffect } from "react";
 const transcript = [
   {
     role: "ai" as const,
-    text: "Good afternoon! Thank you for calling Sunrise Dental. How can I help you today?",
+    text: "Good afternoon, thank you for calling Sunrise Dental. I'm the virtual assistant — how can I help you today?",
   },
   {
     role: "caller" as const,
