@@ -90,7 +90,12 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-divider pt-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-sm text-subtle">© {year} Swarnim Mandal. All rights reserved.</p>
+          <p className="text-sm text-subtle">
+            © {year} Swarnim Mandal. All rights reserved. ·{" "}
+            <Link href="/privacy" className="hover:text-foreground transition-colors">
+              Privacy
+            </Link>
+          </p>
           <p className="text-sm text-subtle">London, United Kingdom</p>
         </div>
       </FadeIn>

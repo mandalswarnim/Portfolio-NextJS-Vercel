@@ -2,6 +2,13 @@
 
 export const CONTACT_EMAIL = "mswarnim1@gmail.com";
 
+export const SITE_URL = "https://swarnimmandal.me";
+export const GITHUB_URL = "https://github.com/mandalswarnim";
+export const LINKEDIN_URL = "https://www.linkedin.com/in/swarnim-mandal-678976259/";
+
+// Path of a CV in public/ (e.g. "/Swarnim_Mandal_CV.pdf"). Download links are hidden until set.
+export const CV_PATH: string | null = null;
+
 // Cal.com / Calendly link. Booking buttons are hidden until this is set.
 export const BOOKING_URL = process.env.NEXT_PUBLIC_BOOKING_URL || null;
 

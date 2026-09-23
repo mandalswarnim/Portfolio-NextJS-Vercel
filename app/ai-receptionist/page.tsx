@@ -7,7 +7,7 @@ import StaggerContainer from "@/components/animations/StaggerContainer";
 import StaggerItem from "@/components/animations/StaggerItem";
 import CallDemo from "@/components/aireception/CallDemo";
 import EnquiryForm from "@/components/aireception/EnquiryForm";
-import { CONTACT_EMAIL, RECEPTIONIST_PRICING, SAMPLE_CALL_AUDIO } from "@/lib/site";
+import { CONTACT_EMAIL, RECEPTIONIST_PRICING, SAMPLE_CALL_AUDIO, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "AI Receptionist — 24/7 Call Answering & Booking Capture",
@@ -227,9 +227,36 @@ function Icon({ path }: { path: string }) {
   );
 }
 
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "AI Receptionist",
+    serviceType: "AI phone answering",
+    url: `${SITE_URL}/ai-receptionist`,
+    areaServed: "GB",
+    provider: { "@type": "Person", name: "Swarnim Mandal", url: SITE_URL },
+    description:
+      "An AI receptionist that answers unanswered business calls, captures caller details and emails a structured summary.",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
+    })),
+  },
+];
+
 export default function AiReceptionistPage() {
   return (
     <div className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="py-24 md:py-28 border-b border-divider">
         <div className="max-w-6xl mx-auto px-6">

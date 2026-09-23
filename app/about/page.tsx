@@ -4,6 +4,7 @@ import FadeIn from "@/components/animations/FadeIn";
 import TextReveal from "@/components/animations/TextReveal";
 import StaggerContainer from "@/components/animations/StaggerContainer";
 import StaggerItem from "@/components/animations/StaggerItem";
+import { CV_PATH } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About — Swarnim Mandal",
@@ -136,11 +137,12 @@ export default function About() {
                   { label: "Email", value: "mswarnim1@gmail.com", href: "mailto:mswarnim1@gmail.com" },
                   { label: "GitHub", value: "mandalswarnim", href: "https://github.com/mandalswarnim" },
                   { label: "LinkedIn", value: "swarnim-mandal", href: "https://www.linkedin.com/in/swarnim-mandal-678976259/" },
+                  ...(CV_PATH ? [{ label: "CV", value: "Download PDF", href: CV_PATH }] : []),
                 ].map((item) => (
                   <div key={item.label} className="flex justify-between items-start gap-4 border-b border-divider pb-5 last:border-0 last:pb-0">
                     <span className="text-sm text-subtle">{item.label}</span>
                     {item.href ? (
-                      <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="text-sm text-foreground hover:text-primary transition-colors text-right">
+                      <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} download={item.label === "CV" || undefined} rel="noopener noreferrer" className="text-sm text-foreground hover:text-primary transition-colors text-right">
                         {item.value}
                       </a>
                     ) : (

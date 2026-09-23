@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import MotionProvider from "@/components/animations/MotionProvider";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, SITE_URL } from "@/lib/site";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -20,6 +21,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Swarnim Mandal — Software Engineer & ML Researcher",
   description:
     "MSc Software Engineering, University of West London. Full-stack developer and machine learning engineer based in London, UK.",
@@ -37,6 +39,18 @@ export const metadata: Metadata = {
   },
 };
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Swarnim Mandal",
+  url: SITE_URL,
+  email: `mailto:${CONTACT_EMAIL}`,
+  jobTitle: "Software Engineer",
+  address: { "@type": "PostalAddress", addressLocality: "London", addressCountry: "GB" },
+  alumniOf: { "@type": "CollegeOrUniversity", name: "University of West London" },
+  sameAs: [GITHUB_URL, LINKEDIN_URL],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -49,6 +63,10 @@ export default function RootLayout({
       className={`${playfair.variable} ${inter.variable}`}
     >
       <body className="antialiased bg-background text-foreground font-sans">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <MotionProvider>
           <Header />
           <main className="pt-20">{children}</main>
