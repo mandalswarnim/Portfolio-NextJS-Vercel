@@ -178,7 +178,7 @@ export default function About() {
                 </p>
                 <p>
                   Outside work I explore audio ML — two of my three public projects involve music
-                  (guitar tablature generation and genre classification). I'm interested in how machine
+                  (guitar tablature generation and genre classification). I&apos;m interested in how machine
                   learning can model creativity, not just categorise it.
                 </p>
               </div>

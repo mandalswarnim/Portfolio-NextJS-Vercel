@@ -57,7 +57,7 @@ export default function UAVModel({
 
 function DroneBody({
   color, matProps, highlight,
-}: { color: string; matProps: any; highlight: string | null }) {
+}: { color: string; matProps: THREE.MeshStandardMaterialParameters; highlight: string | null }) {
   const rotorRefs = [useRef<THREE.Mesh>(null), useRef<THREE.Mesh>(null), useRef<THREE.Mesh>(null), useRef<THREE.Mesh>(null)];
   useFrame((_, dt) => rotorRefs.forEach((r) => r.current && (r.current.rotation.y += dt * 12)));
 
@@ -129,7 +129,7 @@ function DroneBody({
 
 function MissileBody({
   color, matProps, highlight,
-}: { color: string; matProps: any; highlight: string | null }) {
+}: { color: string; matProps: THREE.MeshStandardMaterialParameters; highlight: string | null }) {
   const isHL = (name: string) => highlight && highlight.toLowerCase().includes(name);
   const gyroHL = isHL('gyro') || isHL('imu');
   return (
