@@ -27,6 +27,8 @@ No test suite is configured.
 
 **Pages:** `app/page.tsx` (home), `app/about/`, `app/services/`, `app/contact/`, `app/blog/`, `app/blog/[slug]/`, `app/uav/` (UAV predictive-maintenance dashboard, see below), `app/ai-receptionist/` (sales landing page for the AI Receptionist product — content ported from the gitignored `Reception App/` Twilio+OpenAI app; interactive call demo in `components/aireception/CallDemo.tsx`)
 
+**Contact & conversion** — `app/contact/page.tsx` posts to `app/api/contact/route.ts`, which sends via the Resend REST API (no SDK) with a honeypot + minimum fill-time spam check. Env vars are documented in `.env.example`: `RESEND_API_KEY` (required), `CONTACT_FROM` (verified-domain sender; enables the visitor acknowledgement), `NEXT_PUBLIC_BOOKING_URL` (shows `components/BookingButton.tsx` CTAs). Shared contact constants live in `lib/site.ts`. Vercel Analytics + Speed Insights are mounted in `app/layout.tsx`; custom events: `contact_submitted`, `booking_clicked` (with `source`). `.npmrc` sets `legacy-peer-deps` because `@vercel/analytics` declares an optional Remix peer that conflicts with React 19.
+
 **Blog content** lives as markdown files in `content/blog/` — no CMS or database. The filename is the slug and drives the URL; YAML frontmatter carries `title`, `date`, `excerpt` and `category`, while `readTime` is derived from word count. `lib/blog.ts` reads and caches them at build time via `gray-matter`, and `renderMarkdown()` converts a body to HTML with `remark` + `remark-gfm`. To add a post, drop a new `.md` file in `content/blog/`.
 
 The directory is designed to be opened as an Obsidian vault: `convertWikilinks()` in `lib/blog.ts` rewrites `[[slug]]`, `[[slug|Label]]` and `![[image.png]]` into ordinary markdown links before parsing (fenced code blocks are skipped). Embedded images resolve to `public/blog/`. Vault config under `.obsidian/` is gitignored.
@@ -62,6 +64,5 @@ Fonts loaded via `next/font/google` in `app/layout.tsx`:
 
 ## Known Gaps (planned next patch)
 
-- **Contact form is fake** — simulates submission with a timeout. Planned: wire up Resend API (`app/api/contact/route.ts`) to deliver to `mswarnim1@gmail.com`.
-- **Project GitHub links** in `app/page.tsx` and `app/services/page.tsx` point to the profile root (`github.com/mandalswarnim`) — update with specific repo URLs.
+- **`npm run lint` is broken** — Next 16 removed `next lint`; switch the script to the ESLint CLI.
 - **Hero photo** served from `public/swarnim.jpg` as a plain `<img>` with `grayscale` CSS filter — no `next/image` optimisation applied yet.

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import BookingButton from "@/components/BookingButton";
 import FadeIn from "@/components/animations/FadeIn";
 import TextReveal from "@/components/animations/TextReveal";
 import StaggerContainer from "@/components/animations/StaggerContainer";
@@ -215,6 +216,7 @@ export default function AiReceptionistPage() {
                 >
                   Get in touch to integrate it
                 </Link>
+                <BookingButton source="ai-receptionist-hero" label="Book a demo call" />
                 <a
                   href={EMAIL_HREF}
                   className="inline-flex items-center border border-divider text-foreground text-sm font-medium px-6 py-3 rounded-full hover:border-foreground/40 transition-colors"
@@ -521,6 +523,7 @@ export default function AiReceptionistPage() {
                 >
                   Get in touch
                 </Link>
+                <BookingButton source="ai-receptionist-footer" label="Book a demo call" />
                 <a
                   href={EMAIL_HREF}
                   className="inline-flex items-center border border-divider text-foreground text-sm font-medium px-6 py-3 rounded-full hover:border-foreground/40 transition-colors"

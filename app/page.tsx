@@ -30,7 +30,7 @@ type Project = {
   title: string;
   desc: string;
   tech: string[];
-  link: string;
+  link?: string;
   demo?: string;
 };
 
@@ -56,7 +56,7 @@ const projects: Project[] = [
     title: "UAV Predictive Maintenance Digital Twin",
     desc: "LSTM, Transformer, and 1D-CNN models forecasting Remaining Useful Life on NASA C-MAPSS turbofans and a synthetic UAV fleet — with an interactive 3D dashboard and explainable-AI diagnostics.",
     tech: ["PyTorch", "Next.js", "Three.js"],
-    link: "https://github.com/mandalswarnim",
+    link: "https://github.com/mandalswarnim/uav-pdm-dashboard",
     demo: "/uav",
   },
   {
@@ -64,14 +64,13 @@ const projects: Project[] = [
     title: "Guitar Tablature Generation",
     desc: "LSTM and feed-forward neural network that predicts optimal guitar tablatures for any input melody, modelling musical intention and fretting difficulty.",
     tech: ["Python", "TensorFlow", "Keras"],
-    link: "https://github.com/mandalswarnim",
+    link: "https://github.com/mandalswarnim/Guitar-Tablature-Generation",
   },
   {
     category: "Deep Learning",
     title: "Music Genre Classification",
     desc: "CNN model classifying audio into 10 genres using MFCC features, achieving 79% accuracy on the GTZAN dataset with custom preprocessing.",
     tech: ["Python", "PyTorch", "Librosa"],
-    link: "https://github.com/mandalswarnim",
   },
 ];
 
@@ -234,15 +233,17 @@ export default function Home() {
                           <span className="transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
                         </Link>
                       ))}
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group/gh inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                    >
-                      View on GitHub{" "}
-                      <span className="text-xs transition-transform duration-300 group-hover/gh:-translate-y-0.5 group-hover/gh:translate-x-0.5">↗</span>
-                    </a>
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group/gh inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                      >
+                        View on GitHub{" "}
+                        <span className="text-xs transition-transform duration-300 group-hover/gh:-translate-y-0.5 group-hover/gh:translate-x-0.5">↗</span>
+                      </a>
+                    )}
                   </div>
                 </div>
               </StaggerItem>

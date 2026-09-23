@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import BookingButton from "@/components/BookingButton";
 import FadeIn from "@/components/animations/FadeIn";
 import TextReveal from "@/components/animations/TextReveal";
 import StaggerContainer from "@/components/animations/StaggerContainer";
@@ -15,7 +16,7 @@ type Project = {
   title: string;
   desc: string;
   tech: string[];
-  link: string;
+  link?: string;
   demo?: string;
 };
 
@@ -41,7 +42,7 @@ const projects: Project[] = [
     title: "UAV Predictive Maintenance Digital Twin",
     desc: "LSTM, Transformer, and 1D-CNN models forecasting Remaining Useful Life on the NASA C-MAPSS turbofan benchmark and a synthesized multirotor UAV fleet — served as an interactive digital twin with 3D fleet views, live telemetry, and explainable-AI diagnostics.",
     tech: ["PyTorch", "Next.js", "Three.js", "Transformers"],
-    link: "https://github.com/mandalswarnim",
+    link: "https://github.com/mandalswarnim/uav-pdm-dashboard",
     demo: "/uav",
   },
   {
@@ -49,21 +50,20 @@ const projects: Project[] = [
     title: "Guitar Tablature Generation",
     desc: "LSTM and feed-forward neural network that predicts optimal guitar tablatures for any input melody — modelling musical intention and fretting difficulty from training data probabilities.",
     tech: ["Python", "TensorFlow", "Keras"],
-    link: "https://github.com/mandalswarnim",
+    link: "https://github.com/mandalswarnim/Guitar-Tablature-Generation",
   },
   {
     category: "Machine Learning",
     title: "Heart Disease Prediction",
     desc: "Logistic regression model predicting heart disease likelihood in COVID-19 patients, using clinical and demographic factors including age, smoking status, and cholesterol levels.",
     tech: ["Python", "Scikit-Learn", "Seaborn", "Matplotlib"],
-    link: "https://github.com/mandalswarnim",
+    link: "https://github.com/mandalswarnim/Heart_Disease_Prediction",
   },
   {
     category: "Deep Learning",
     title: "Music Genre Classification",
     desc: "CNN model classifying audio files into 10 genres using MFCC features extracted from the GTZAN dataset, achieving 79% accuracy with custom preprocessing and normalisation.",
     tech: ["Python", "PyTorch", "Librosa"],
-    link: "https://github.com/mandalswarnim",
   },
 ];
 
@@ -175,14 +175,16 @@ export default function Services() {
                           Try me →
                         </Link>
                       ))}
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                    >
-                      View on GitHub <span className="text-xs">↗</span>
-                    </a>
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                      >
+                        View on GitHub <span className="text-xs">↗</span>
+                      </a>
+                    )}
                   </div>
                 </div>
               </StaggerItem>
@@ -272,12 +274,15 @@ export default function Services() {
                 </h2>
                 <p className="text-muted">Let&apos;s discuss your project.</p>
               </div>
-              <Link
-                href="/contact"
-                className="inline-flex items-center bg-foreground text-background text-sm font-medium px-6 py-3 rounded-full hover:bg-foreground/80 transition-colors whitespace-nowrap"
-              >
-                Get in touch
-              </Link>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center bg-foreground text-background text-sm font-medium px-6 py-3 rounded-full hover:bg-foreground/80 transition-colors whitespace-nowrap"
+                >
+                  Get in touch
+                </Link>
+                <BookingButton source="services" />
+              </div>
             </div>
           </FadeIn>
         </div>

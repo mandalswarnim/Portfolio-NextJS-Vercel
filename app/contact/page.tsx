@@ -1,14 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { track } from "@vercel/analytics";
 import FadeIn from "@/components/animations/FadeIn";
 import TextReveal from "@/components/animations/TextReveal";
+import { BOOKING_URL, CONTACT_EMAIL } from "@/lib/site";
 
 const contactLinks = [
   {
     label: "Email",
-    value: "mswarnim1@gmail.com",
-    href: "mailto:mswarnim1@gmail.com",
+    value: CONTACT_EMAIL,
+    href: `mailto:${CONTACT_EMAIL}`,
   },
   {
     label: "Phone",
@@ -33,8 +35,10 @@ const contactLinks = [
 ];
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "", website: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [error, setError] = useState("");
+  const startedAt = useRef(Date.now());
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -43,11 +47,22 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
-    setTimeout(() => {
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, startedAt: startedAt.current }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || `Something went wrong — please email ${CONTACT_EMAIL}.`);
       setStatus("success");
-      setForm({ name: "", email: "", subject: "", message: "" });
-      setTimeout(() => setStatus("idle"), 4000);
-    }, 1000);
+      track("contact_submitted");
+      setForm({ name: "", email: "", subject: "", message: "", website: "" });
+    } catch (err) {
+      setStatus("error");
+      setError(err instanceof Error ? err.message : `Something went wrong — please email ${CONTACT_EMAIL}.`);
+    }
   };
 
   const inputClass =
@@ -71,6 +86,17 @@ export default function Contact() {
               Open to full-time roles, freelance projects, and research collaborations.
               I typically respond within 24 hours.
             </p>
+            {BOOKING_URL && (
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track("booking_clicked", { source: "contact" })}
+                className="mt-8 inline-flex items-center gap-1.5 bg-foreground text-background text-sm font-medium px-6 py-3 rounded-full hover:bg-foreground/80 transition-colors"
+              >
+                Book a 20-minute call <span className="text-xs">↗</span>
+              </a>
+            )}
           </FadeIn>
         </div>
       </section>
@@ -106,6 +132,19 @@ export default function Contact() {
             {/* Right: form */}
             <FadeIn delay={0.1}>
               <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Honeypot — hidden from people, filled in by bots */}
+                <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                  <label htmlFor="website">Website</label>
+                  <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={form.website}
+                    onChange={handleChange}
+                  />
+                </div>
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="name" className="block text-xs font-medium text-subtle uppercase tracking-wider mb-2">
@@ -118,6 +157,7 @@ export default function Contact() {
                       value={form.name}
                       onChange={handleChange}
                       required
+                      maxLength={100}
                       placeholder="Your name"
                       className={inputClass}
                     />
@@ -150,6 +190,7 @@ export default function Contact() {
                     value={form.subject}
                     onChange={handleChange}
                     required
+                    maxLength={200}
                     placeholder="What's this about?"
                     className={inputClass}
                   />
@@ -165,6 +206,7 @@ export default function Contact() {
                     value={form.message}
                     onChange={handleChange}
                     required
+                    maxLength={5000}
                     rows={7}
                     placeholder="Tell me about your project or idea..."
                     className={`${inputClass} resize-none`}
@@ -180,11 +222,12 @@ export default function Contact() {
                     {status === "sending" ? "Sending…" : "Send message"}
                   </button>
 
-                  {status === "success" && (
-                    <p className="text-sm text-primary">
-                      Message sent — I&apos;ll be in touch soon.
-                    </p>
-                  )}
+                  <p role="status" aria-live="polite" className="text-sm">
+                    {status === "success" && (
+                      <span className="text-primary">Message sent — I&apos;ll be in touch soon.</span>
+                    )}
+                    {status === "error" && <span className="text-status-critical">{error}</span>}
+                  </p>
                 </div>
               </form>
             </FadeIn>
